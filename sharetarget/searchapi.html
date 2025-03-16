@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>ค้นหาข้อมูลจากSheet</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"></script>
+    <!-- LineSeed Fonts -->
+<link href="https://cdn.jsdelivr.net/gh/maketline/goodday/font/stylesheet.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            margin: 0;
+            font-family: 'line_seed_sans_th';
+
+        }
+
+        .container {
+            margin: 20px auto;
+            height: 90vh;
+            width: 90vw;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="containermx-auto max-w-xl p-6">
+
+        <div class="bg-gray-100  p-6 rounded-lg shadow-lg">
+            <div class="w-full md:w-1/2 md:mx-auto flex flex-col md:flex-row items-center justify-center text-center">
+                <img class="inline-flex object-cover border-4 border-indigo-600 rounded-full shadow-[5px_5px_0_0_rgba(0,0,0,1)] shadow-indigo-600/100 dark:shadow-indigo-700/100 bg-indigo-50 h-24 w-24 !h-32 !w-32 mb-4 md:mb-0 ml-0 md:mr-5"
+                    src="https://media.giphy.com/media/55aZPPaqOvsUoxkapE/giphy.gif" alt="" id="profileurl">
+
+            </div>
+            <h1 class="text-2xl font-semibold mb-4">สวัสดีคุณ: <span id="displaynamefield"></span></h1>
+
+
+            <div class="mb-4">
+                <label for="coupon" class="block text-gray-700 font-semibold mb-2">Prompt:</label>
+                <input type="text" id="msgInput" name="text"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="พิมพ์ถาม AI ตามที่ต้องการได้เลย">
+            </div>
+
+
+            <div class="text-center">
+                <button
+                    class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+                    onclick="generateAndDisplayContent()">
+                    <span id="btnText">ค้นหาข้อมูล</span>
+                    <span id="loading" class="hidden ml-2"><svg aria-hidden="true" role="status"
+                            class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="#E5E7EB" />
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentColor" />
+                        </svg> กำลังค้นหา...</span>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="max-w-6xl mx-auto">
+
+        <div class="flex justify-center min-h-screen">
+
+            <div class="max-w-md w-full p-4 py-6">
+
+                <ul id="output" class="user-info">
+                    <li>
+                        <h3>รอคำถามจากคุณอยู่...</h3>
+
+                    </li>
+                </ul>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<script>
+    function generateAndDisplayContent() {
+        var msgText = document.getElementById('msgInput').value;
+
+        if (!msgText) {
+            return;
+        }
+
+        document.getElementById('btnText').style.display = 'none';
+        document.getElementById('loading').style.display = 'inline-block';
+
+        //var apiKey = 'AIzaSyC96Utj8dlf5z93bTpZdEm1rWbPP2ksh7g';
+        var apiUrl = 'https://script.google.com/macros/s/AKfycbwqX-RKje9f2Rgc2ga7kGSxZ0161LnzfUDinHuanbd7RpR9RatTbHDlR0kSNFjrXwaq/exec';
+        var payload = {
+            contents: [{
+                parts: [{
+                    text: "" + msgText
+                }]
+            }]
+        };
+
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+
+        fetch(apiUrl, options)
+            .then(response => response.json())
+            .then(data => {
+                var generatedContent = data.candidates[1].content.parts[1].text;
+                displayContent(msgText, generatedContent);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function displayContent(msgTexts, content) {
+        var outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = `<p style="white-space: pre-line;"><b>Gemini ตอบ: </b><br>HELLO WOLD</p><br>
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500" id="flex">แชร์เนื้อหานี้ให้เพื่อน</button>`;
+
+        document.getElementById('flex').addEventListener('click', () => {
+            searchflex(`${msgTexts}`, `${content}`);
+        });
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('btnText').style.display = 'inline-block';
+
+        document.getElementById('msgInput').value = '';
+    }
+
+    function searchflex(msgTexts, content) {
+        liff.shareTargetPicker([{
+            "type": "flex",
+            "altText": "แชร์โดย " + liff.getDecodedIDToken().name,
+            "contents": {
+                // Your flex message content here
+            }
+        }])
+            .then(function (res) {
+                if (res) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'ส่งเข้าแชทเรียบร้อย',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        liff.closeWindow();
+                    });
+                } else {
+                    console.log("TargetPicker was closed!");
+                }
+            })
+            .catch(function (error) {
+                console.log("Something went wrong:", error);
+            });
+    }
+
+    var userId = "";
+
+    window.onload = function () {
+        initializeLiff("1656032875-dMjmJ80q");
+    };
+
+    function initializeLiff(myLiffId) {
+        liff
+            .init({
+                liffId: myLiffId
+            })
+            .then(() => {
+                if (!liff.isInClient() && !liff.isLoggedIn()) {
+                    liff.login();
+                } else {
+                    liff.getProfile()
+                        .then(function (profile) {
+                            document.getElementById('profileurl').src = '' + profile.pictureUrl;
+                            document.getElementById('displaynamefield').textContent = '' + profile.displayName;
+                            userId = profile.userId;
+                            if (!liff.isInClient()) {
+                                // Additional logic for non-client scenarios
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error('Error getting profile:', error);
+                        });
+                }
+            })
+            .catch(function (error) {
+                console.error('LIFF initialization failed:', error);
+            });
+    }
+</script>
+
+
+
+
+</body>
+
+</html>

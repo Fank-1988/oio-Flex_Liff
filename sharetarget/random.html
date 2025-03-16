@@ -1,0 +1,516 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Game</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+  <style>
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+   font-family: 'line_seed_sans_th';
+}
+
+body {
+  position: relative;
+  font-family: 'line_seed_sans_th';
+}
+
+.cobweb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+
+.home {
+  background: rgb(91, 35, 125);
+  background: linear-gradient(
+    180deg,
+    rgba(91, 35, 125, 1) 16%,
+    rgba(32, 13, 54, 1) 73%
+  );
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home h1 {
+  font-size: 5rem;
+  z-index: 3;
+  text-align: center;
+  animation: blink 3s linear infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    color: #fe7c51;
+  }
+
+  50% {
+    color: rgb(234, 73, 14);
+  }
+}
+
+.img-drag {
+  position: relative;
+  width: 16vw;
+  height: 20vw;
+  min-height: 150px;
+  min-width: 120px;
+  max-height: 750px;
+  max-width: 600px;
+  margin: 3rem;
+  cursor: grab;
+}
+
+
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: rgb(32, 13, 54);
+  background: linear-gradient(
+    0deg,
+    rgba(91, 35, 125, 1) 16%,
+    rgba(32, 13, 54, 1) 73%
+  );
+  padding-bottom: 50px;
+}
+
+.scroll {
+  display: flex;
+  align-items: center;
+  margin: 0 2rem;
+  overflow: hidden;
+  scrollbar-width: none;
+  width: auto;
+  animation: scrolling 15s infinite linear;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-30%);
+  }
+}
+
+.scroll p {
+  font-family: 'line_seed_sans_th';
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0;
+  line-height: 30px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(168, 96, 45, 1) 0%,
+    rgba(142, 148, 45, 1) 11%,
+    rgba(98, 148, 40, 1) 19%,
+    rgba(35, 125, 101, 1) 30%,
+    rgba(33, 119, 144, 1) 43%,
+    rgba(73, 114, 214, 1) 56%,
+    rgba(65, 40, 158, 1) 67%,
+    rgba(136, 27, 130, 1) 79%,
+    rgba(145, 23, 102, 1) 90%,
+    rgba(158, 18, 59, 1) 100%
+  );
+  color: transparent;
+  background-size: contain;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: stripes 5s infinite alternate;
+}
+
+@keyframes stripes {
+  100% {
+    background-position: 100px 0, 100px 0, 100px 0;
+  }
+}
+
+.game h1 {
+  margin: 40px 0 30px;
+  font-size: 1.8rem;
+  color: #ed622f;
+}
+
+.memory-game {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+.memory-game img {
+  width: 100%;
+  max-width: 140px;
+}
+
+.memory-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(25% - 10px);
+  height: calc(33.333% - 10px);
+  margin: 5px;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s linear;
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  backface-visibility: hidden;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+  border: 2px solid rgba(32, 13, 54, 1);
+}
+
+
+@media (max-width: 670px) {
+  .home h1 {
+  font-size: 3rem;
+  }
+}
+  </style>
+</head>
+<body>
+
+    <section class="game">
+
+      <div class="flex flex-col gap-3">
+    <div class="relative border border-gray-200 rounded-lg shadow-lg">
+     
+    
+      <div class="flex items-center p-4">
+        <img
+          class="object-cover w-12 h-12 rounded-lg"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDU0bDJtZWtiZTN1NXVmc3lpYnhzNWl5dXAzYXU0c20xYXAzMmNiMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/5AtXMjjrTMwvK/giphy.gif"
+          alt="profile" id="profileurl"
+        />
+    
+        <div class="ml-3 overflow-hidden">
+          <p class="font-medium text-gray-900 text-white" id="displaynamefield">Display Name</p>
+          <p class="max-w-xs text-sm text-gray-500 truncate">
+           ผู้เล่นกิจกรรม
+          </p>
+        </div>
+      </div>
+    </div>
+   
+   
+
+
+</div>
+      <div class="scroll">
+        <p><b>Game จับคู่ for LIFF</b></p>
+      </div>
+    
+      <div class="memory-game">
+        <div class="memory-card" data-name="goku">
+          <img class="front-face" src="https://i.pinimg.com/originals/d8/00/21/d80021588ac96b16ae7992117050a1a9.gif" alt="goku" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+        <div class="memory-card" data-name="goku">
+          <img class="front-face" src="https://i.pinimg.com/originals/d8/00/21/d80021588ac96b16ae7992117050a1a9.gif" alt="goku" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+
+        <div class="memory-card" data-name="piccolo">
+          <img class="front-face" src="https://i.pinimg.com/originals/5a/e8/58/5ae8580cf15fe0aa443fd3e79bf32d68.gif" alt="piccolo" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+        <div class="memory-card" data-name="piccolo">
+          <img class="front-face" src="https://i.pinimg.com/originals/5a/e8/58/5ae8580cf15fe0aa443fd3e79bf32d68.gif" alt="piccolo" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+
+        <div class="memory-card" data-name="gohun">
+          <img class="front-face" src="https://i.pinimg.com/originals/e8/58/a7/e858a766267798053f8540ba62ff38ef.gif" alt="gohun" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+        <div class="memory-card" data-name="gohun">
+          <img class="front-face" src="https://i.pinimg.com/originals/e8/58/a7/e858a766267798053f8540ba62ff38ef.gif" alt="gohun" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+
+        <div class="memory-card" data-name="yumcha">
+          <img class="front-face" src="https://i.pinimg.com/originals/3b/db/06/3bdb0635f95690d994862c99c5ee533d.gif" alt="yumcha" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+        <div class="memory-card" data-name="yumcha">
+          <img class="front-face" src="https://i.pinimg.com/originals/3b/db/06/3bdb0635f95690d994862c99c5ee533d.gif" alt="yumcha" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+
+        <div class="memory-card" data-name="skull">
+          <img class="front-face" src="https://i.pinimg.com/originals/13/3f/ed/133fed4e3e86b5ba9a5daff0e3b44e96.gif" alt="skull" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+        <div class="memory-card" data-name="skull">
+          <img class="front-face" src="https://i.pinimg.com/originals/13/3f/ed/133fed4e3e86b5ba9a5daff0e3b44e96.gif" alt="skull" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+
+        <div class="memory-card" data-name="no18">
+          <img class="front-face" src="https://i.pinimg.com/originals/6b/a1/15/6ba115121b366a8b86c72fc3ce137fac.gif" alt="no18" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+        <div class="memory-card" data-name="no18">
+          <img class="front-face" src="https://i.pinimg.com/originals/6b/a1/15/6ba115121b366a8b86c72fc3ce137fac.gif" alt="no18" />
+          <img class="back-face" src="https://i.pinimg.com/236x/43/da/cf/43dacf6a71552f0e0dc17413f575becd.jpg" alt="backimage" />
+        </div>
+      </div>
+   </section>
+   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        const cards = document.querySelectorAll(".memory-card");
+        const totalPairs = cards.length / 2;
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let firstCard, secondCard;
+        let matchedPairs = 0;
+    
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+            this.classList.add("flip");
+    
+            if (!hasFlippedCard) {
+                hasFlippedCard = true;
+                firstCard = this;
+                return;
+            }
+            hasFlippedCard = false;
+            secondCard = this;
+            checkForMatch();
+        }
+    
+        function checkForMatch() {
+            let isMatch = firstCard.dataset.name === secondCard.dataset.name;
+            isMatch ? disableCards() : unFlipCards();
+            if(isMatch){
+              Toastify({
+  text: "ใช่เลย",
+  className: "info",
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  }
+}).showToast();
+            }
+        }
+    
+        function disableCards() {
+            firstCard.removeEventListener("click", flipCard);
+            secondCard.removeEventListener("click", flipCard);
+    
+            resetBoard();
+            matchedPairs++;
+    
+            if (matchedPairs === totalPairs) {
+                  Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'จบเกมส์แล้ว',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(()=>{
+                    liff.sendMessages([
+    {
+  "type": "flex",
+  "altText": "ยินดีด้วยชนะแล้ว",
+  "contents": {
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "image",
+                "url": "" +liff.getDecodedIDToken().picture,
+                "size": "full",
+                "aspectMode": "fit",
+                "aspectRatio": "1:1"
+              }
+            ],
+            "width": "75px",
+            "height": "75px",
+            "cornerRadius": "150px",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "borderWidth": "2px",
+            "borderColor": "#000000"
+          },
+          {
+            "type": "text",
+            "text": "" + liff.getDecodedIDToken().name,
+            "margin": "md",
+            "wrap": true,
+            "weight": "bold"
+          }
+        ],
+        "alignItems": "center"
+      },
+      {
+        "type": "separator",
+        "margin": "md"
+      },
+      {
+        "type": "text",
+        "text": "ยินดีด้วยชนะเกมจับคู่แล้ว",
+        "align": "center",
+        "size": "3xl",
+        "weight": "bold",
+        "wrap": true,
+        "color": "#00be00",
+        "margin": "md"
+      },
+      {
+        "type": "image",
+        "url": "https://lh3.googleusercontent.com/d/1-vkWSnrT-fAUIdCECwxKZ5HF53BFjqqH",
+        "size": "xxl",
+        "animated": true
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "เริ่มใหม่",
+          "uri": "https://line.me/R/app/1656032875-dMjmJ80q"
+        },
+        "height": "sm",
+        "style": "primary"
+      }
+    ]
+  }
+}
+    }
+  ])
+  .then(() => {
+    liff.closeWindow()
+  })
+                  })
+            }
+        }
+    
+        function unFlipCards() {
+            lockBoard = true;
+    
+            setTimeout(() => {
+                firstCard.classList.remove("flip");
+                secondCard.classList.remove("flip");
+    
+                resetBoard();
+            }, 1500);
+        }
+    
+        function resetBoard() {
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
+        }
+    
+        (function shuffle() {
+            cards.forEach((card) => {
+                let randomPosition = Math.floor(Math.random() * totalPairs);
+                card.style.order = randomPosition;
+            });
+        })();
+    
+        cards.forEach((card) => card.addEventListener("click", flipCard));
+    </script>
+      <script>
+        var userId = "";
+
+        window.onload = function () {
+            initializeLiff("1656032875-dMjmJ80q");
+
+        };
+
+        function initializeLiff(myLiffId) {
+            liff
+                .init({
+                    liffId: myLiffId
+                })
+                .then(() => {
+
+                    if (!liff.isInClient() && !liff.isLoggedIn()) {
+
+                        liff.login();
+                    }
+                    else {
+
+                        liff.getProfile().then(function (profile) {
+                            document.getElementById('profileurl').src = '' + profile.pictureUrl
+                            document.getElementById('displaynamefield').textContent = '' + profile.displayName;
+
+                            userId = profile.userId;
+                           
+                        }).catch(function (error) {
+                            window.alert('Error getting profile: ' + error);
+                        })
+                    }
+
+                })
+        }
+    </script>
+</body>
+</html>

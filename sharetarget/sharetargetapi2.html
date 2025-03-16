@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Flex Message Sender</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function sendFlexMessage() {
+      // URL ของ API ที่ต้องการดึงข้อมูล
+      var apiUrl = 'https://benas-spread.com/content/wp-json/wp/v2/news?lang=th';
+
+      // ดึงข้อมูลจาก API
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(newsData => {
+          // สร้าง Flex Message โดยใช้ข้อมูลจาก API
+          var flexMessage = createFlexMessage(newsData);
+
+          // ส่ง Flex Message ไปยัง LIFF ShareTargetPicker
+          sendLineMessage(flexMessage);
+        })
+        .catch(error => console.error('Error fetching data: ', error));
+    }
+
+    function createFlexMessage(newsData) {
+      // ตัวอย่างการสร้าง Flex Message โดยใช้ข้อมูลจาก API
+      var flexMessage = {
+        "type": "flex",
+        "altText": "ข่าวล่าสุด",
+        "contents": {
+          "type": "carousel",
+          "contents": newsData.map(function(newsItem) {
+            // ตรวจสอบว่าแต่ละข่าวมีข้อมูลที่จำเป็นหรือไม่
+            if (!newsItem.title || !newsItem.title.rendered || !newsItem.acf || !newsItem.acf.featured_image || !newsItem.acf.short_description || !newsItem.link) {
+              return {
+                "type": "bubble",
+                "body": {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "ข้อมูลข่าวไม่ครบถ้วน",
+                      "weight": "bold",
+                      "size": "md",
+                      "wrap": true
+                    }
+                  ]
+                }
+              };
+            }
+
+            return {
+              "type": "bubble",
+              "hero": {
+                "type": "image",
+                "url": newsItem.acf.featured_image || "https://via.placeholder.com/500x300", // ใช้ภาพ placeholder หากไม่มีภาพจาก API
+                "size": "full",
+                "aspectRatio": "1:1",
+                "aspectMode": "cover"
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": newsItem.title.rendered,
+                    "weight": "bold",
+                    "size": "xl"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "baseline",
+                    "margin": "md",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": newsItem.acf.short_description,
+                        "wrap": true,
+                        "size": "md",
+                        "flex": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                      "type": "uri",
+                      "label": "อ่านเพิ่มเติม",
+                      "uri": newsItem.link
+                    }
+                  }
+                ],
+                "flex": 0
+              }
+            };
+          })
+        }
+      };
+      return flexMessage;
+    }
+
+    function sendLineMessage(flexMessage) {
+      // เรียกใช้ LIFF SDK
+      liff.init({
+        liffId: '1656032875-dMjmJ80q' // เปลี่ยนเป็น LIFF ID ของคุณ
+      }).then(() => {
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        } else {
+          liff.shareTargetPicker([flexMessage]).then(() => {
+            Swal.fire({
+              title: 'สำเร็จ!',
+              text: 'ส่งข้อความเรียบร้อยแล้ว',
+              icon: 'success',
+              confirmButtonText: 'ตกลง'
+            }).then(() => {
+              liff.closeWindow();
+            });
+          }).catch((err) => {
+            console.error('Error sending message: ', err);
+          });
+        }
+      }).catch((err) => {
+        console.error('LIFF initialization failed: ', err);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+      sendFlexMessage();
+    });
+  </script>
+</head>
+<body>
+  <h1>ส่ง Flex Message</h1>
+  <button onclick="sendFlexMessage()">ส่งข่าวล่าสุด</button>
+</body>
+</html>

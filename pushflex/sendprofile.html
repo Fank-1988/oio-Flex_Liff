@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ส่งโปรไฟล์เป็นflexMessage ด้วยLIFF</title>
+  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script>
+    let userProfile;
+
+    function initializeLiff(myLiffId) {
+      console.log('Initializing LIFF');
+      liff.init({ liffId: myLiffId })
+        .then(() => {
+          console.log('LIFF initialized');
+          if (liff.isLoggedIn()) {
+            console.log('User is logged in');
+            liff.getProfile()
+              .then(profile => {
+                console.log('Profile retrieved', profile);
+                userProfile = profile;
+                document.getElementById('displayName').textContent = `สวัสดีคุณ:, ${profile.displayName}`;
+                document.getElementById('userId').textContent = `User ID: ${profile.userId}`;
+                document.getElementById('statusMessage').textContent = `Status Message: ${profile.statusMessage}`;
+                document.getElementById('profileImage').src = profile.pictureUrl;
+              })
+              .catch(err => {
+                console.error('Error getting profile: ', err);
+              });
+          } else {
+            console.log('User is not logged in, redirecting to login');
+            liff.login();
+          }
+        })
+        .catch(err => {
+          console.error('LIFF Initialization failed ', err);
+        });
+    }
+
+    function sendMessage() {
+      if (!liff.isInClient()) {
+        alert('This function is only available in the LINE app.');
+        return;
+      }
+      if (userProfile) {
+        const flexMessage = {
+          type: "flex",
+          altText: "User Profile",
+          contents: {
+            type: "bubble",
+            hero: {
+              type: "image",
+              url: userProfile.pictureUrl,
+              size: "full",
+              aspectRatio: "1:1",
+              aspectMode: "cover",
+            },
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "text",
+                  text: userProfile.displayName,
+                  weight: "bold",
+                  size: "xl"
+                },
+                {
+                  type: "text",
+                  text: `User ID: ${userProfile.userId}`,
+                  size: "sm",
+                  color: "#999999"
+                },
+                {
+                  type: "text",
+                  text: `Status Message: ${userProfile.statusMessage}`,
+                  size: "sm",
+                  color: "#999999",
+                  wrap: true
+                }
+              ]
+            }
+          }
+        };
+
+        liff.sendMessages([flexMessage])
+          .then(() => {
+            alert('Profile sent!');
+          })
+          .catch((error) => {
+            console.error('Error sending message: ', error);
+            alert('Error sending message: ' + error);
+          });
+      }
+    }
+
+     function shareMessage() {
+      if (userProfile) {
+        const flexMessage = {
+          type: "flex",
+          altText: "User Profile",
+          contents: {
+            type: "bubble",
+            hero: {
+              type: "image",
+              url: userProfile.pictureUrl,
+              size: "full",
+              aspectRatio: "1:1",
+              aspectMode: "cover",
+            },
+            body: {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "text",
+                  text: userProfile.displayName,
+                  weight: "bold",
+                  size: "xl"
+                },
+                {
+                  type: "text",
+                  text: `User ID: ${userProfile.userId}`,
+                  size: "sm",
+                  color: "#999999"
+                },
+                {
+                  type: "text",
+                  text: `Status Message: ${userProfile.statusMessage}`,
+                  size: "sm",
+                  color: "#999999",
+                  wrap: true
+                }
+              ]
+            }
+          }
+        };
+
+        liff.shareTargetPicker([flexMessage])
+          .then((res) => {
+            if (res) {
+              alert('Profile shared!');
+            } else {
+              alert('Share target picker was closed.');
+            }
+          })
+          .catch((error) => {
+            console.error('Error sharing message: ', error);
+            alert('Error sharing message: ' + error);
+          });
+      }
+    }
+
+    function generateQR() {
+      const textInput = document.getElementById('textInput').value;
+      const qrImg = document.getElementById('qrImg');
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?data=${textInput}&size=100x100`;
+      qrImg.style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var myLiffId = '1656032875-dMjmJ80q'; // Replace with your LIFF ID
+      console.log('DOMContentLoaded');
+      initializeLiff(myLiffId);
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container mt-4">
+    <h2 id="displayName">สวัสดีคุณ:</h2>
+    <p id="userId"></p>
+    <p id="statusMessage"></p>
+    <img id="profileImage" src="" alt="Profile Image" style="width:100px;height:100px;" />
+    <div class="mt-3">
+      <button type="button" class="btn btn-primary" onclick="sendMessage()">Send Profile</button>
+      <button type="button" class="btn btn-success" onclick="shareMessage()">Share Profile</button>
+    </div>
+    <div class="mt-4">
+      <input type="text" id="textInput" class="form-control" placeholder="Enter text for QR code">
+      <button type="button" class="btn btn-info mt-2" onclick="generateQR()">Generate QR Code</button>
+      <img id="qrImg" src="" alt="QR Code" style="display: none;">
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

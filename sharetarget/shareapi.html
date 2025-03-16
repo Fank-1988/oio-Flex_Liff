@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <title>New Theme LINE by iton5</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"  rel="stylesheet" />
+<link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+    <style type="text/css">
+
+       {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #F8F9FD;
+        font-family: 'line_seed_sans_th';
+       
+        align-items: center;
+        justify-content: center;
+        
+      
+      }
+
+     
+
+      .title {
+        margin: 0;
+      }
+
+      .subtitle {
+        display: inline-block;
+        margin: 5px 0 20px;
+        opacity: 0.8;
+      }
+
+      .header {
+        background-color: #5b0d85;
+        color: #fff;
+        padding: 30px 20px;
+      }
+
+      .header input {
+        background-color: #ffffff;
+        border: 0;
+        border-radius: 50px;
+        color: #010000;
+
+        font-size: 14px;
+        padding: 10px 15px;
+        width: 100%;
+      }
+
+      /* .users-list {
+        background-color: #fff;
+        list-style-type: none;
+        margin: 0;
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 0;
+      }
+
+      .users-list li {
+        display: flex;
+        padding: 20px;
+      } */
+
+      .users-list li:not(:last-of-type) {
+        border-bottom: 1px solid #eee;
+      }
+
+      .users-list li.hide {
+        display: none;
+      }
+
+      
+
+      .user-info {
+        margin-left: 10px;
+      }
+
+      .user-info h4 {
+        margin: 0 0 10px;
+      }
+
+      .user-info p {
+        font-size: 12px;
+      }
+
+
+
+      .social-panel-container {
+        position: fixed;
+        right: 0;
+        bottom: 80px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+      }
+
+      .social-panel-container.visible {
+        transform: translateX(-10px);
+      }
+
+      .social-panel {	
+        background-color: #fff;
+        border-radius: 16px;
+        box-shadow: 0 16px 31px -17px rgba(0,31,97,0.6);
+        border: 5px solid #001F61;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 169px;	
+        width: 370px;
+        max-width: calc(100% - 10px);
+      }
+
+      .social-panel button.close-btn {
+        border: 0;
+        color: #97A5CE;
+        cursor: pointer;
+        font-size: 20px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+
+      .social-panel button.close-btn:focus {
+        outline: none;
+      }
+
+      .social-panel p {
+        background-color: #001F61;
+        border-radius: 0 0 10px 10px;
+        color: #fff;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 2px 17px 6px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin: 0;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 235px;
+      }
+
+      .social-panel p i {
+        margin: 0 5px;
+      }
+
+      .social-panel p a {
+        color: #eaff00;
+        text-decoration: none;
+      }
+
+      .social-panel h4 {
+        margin: 20px 0;
+        color: #97A5CE;
+        font-size: 14px;	
+        line-height: 18px;
+        text-transform: uppercase;
+      }
+
+      .social-panel ul {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .social-panel ul li {
+        margin: 0 10px;
+      }
+
+      .social-panel ul li a {
+        border: 1px solid #DCE1F2;
+        border-radius: 50%;
+        color: #001F61;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 50px;
+        text-decoration: none;
+      }
+
+      .social-panel ul li a:hover {
+        border-color: #3300ff;
+        box-shadow: 0 9px 12px -9px #3300ff;
+      }
+
+      .floating-btn {
+        border-radius: 26.5px;
+        background-color: #001F61;
+        border: 1px solid #001F61;
+        box-shadow: 0 16px 22px -17px #03153B;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 12px 20px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+
+      .floating-btn:hover {
+        background-color: #ffffff;
+        color: #001F61;
+      }
+
+      .floating-btn:focus {
+        outline: none;
+      }
+
+      .floating-text {
+        background-color: #001F61;
+        border-radius: 10px 10px 0 0;
+        color: #fff;
+        font-family: 'Muli';
+        padding: 7px 15px;
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 998;
+      }
+
+      .floating-text a {
+        color: #FF7500;
+        text-decoration: none;
+      }
+    </style>
+
+
+</head>
+<body>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="#" class="flex items-center">
+        <img src="https://sv1.picz.in.th/images/2023/03/17/eHZLft.png" class="h-8 mr-3 rounded-full" id="profileurl" alt="userImage" />
+        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white" id="displaynamefield">....</span>
+    </a>
+    <div class="flex md:order-2">
+      <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1" >
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+        <span class="sr-only">Search</span>
+      </button>
+      <div class="relative hidden md:block">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+          <span class="sr-only">Search icon</span>
+        </div>
+        <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
+      </div>
+      
+    </div>
+      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+        <div class="relative mt-3 md:hidden">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+          </div>
+          <input type="text" id="filter" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
+        </div>
+        
+      </div>
+    </div>
+  </nav>
+
+  
+    <section class="px-10 w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm-grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-7 mt-10 mb-5" >
+      <ul id="result" class="users-list">
+          <li>
+              <h3>โปรดรอสักครู่...</h3>
+          </li>
+      </ul>
+
+
+    </section>
+
+
+
+
+
+
+
+
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        const result = document.getElementById('result');
+const filter = document.getElementById('filter');
+const listItems = [];
+      window.onload = function() {
+
+        $.getScript("https://db.iton5.repl.co/getliff.js", function() {
+           getData();
+          initializeLiff("1656032875-dMjmJ80q");
+
+          document.querySelector('#flex').addEventListener('click', (e) =>{
+            var msg = [{
+                           "type": "text",
+                           "text": "ok"
+                       }]
+             sendText(msg)
+          })
+          });
+        }
+
+
+
+
+
+
+
+
+filter.addEventListener('input', (e) => {
+  filterData(e.target.value);
+});
+
+
+      function getData() {
+          fetch('https://opensheet.elk.sh/1Xt9xv_kjQj8Vvpw3QnNlBiVvn0bF1m6pDSBxPdStpWg/theme')
+              .then(res => res.json())
+              .then(data => {
+                  // clear
+                  result.innerHTML = '';
+
+                  const filteredData = data.filter(user => {
+                      const li = document.createElement('li');
+
+                      // store for filter
+                      listItems.push(li);
+
+                      li.innerHTML = `
+                      <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+              <a href="${user.link}"> <img src="${user.image}" alt="Product" class="h-80 w-72 object rounded-t-xl" /></a>
+              <div class="px-4 py-3 w-72">
+                <span class="text-gray-400 mr-3 uppercase text-xs">ดู Theme ต่างประเทศ คลิกที่ภาพ</span>
+                <p class="text-lg font-bold text-black truncate block capitalize">${user.name}</p>
+                <div class="flex items-center">
+                  <p class="text-lg font-semibold text-black cursor-auto my-3">${user.price} บาท</p>
+                  <del>
+                    <p class="text-sm text-gray-600 cursor-auto ml-2">99 บาท</p>
+                  </del>
+                  <div class="ml-auto" onclick="searchflex('${user.name}' , '${user.image}' , '${user.price}' , '${user.link}')">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+</svg>
+</div>
+                </div>
+              </div>
+            </a>
+          </div>
+                      `;
+
+                      result.appendChild(li);
+                      return true; 
+                  });
+
+              });
+      }
+
+
+function filterData(searchTerm) {
+  listItems.forEach(item => {
+    if(item.innerText.toLowerCase().includes(searchTerm.toLowerCase())) {
+      item.classList.remove('hide');
+    } else {
+      item.classList.add('hide');
+    }
+  });
+}
+
+function searchflex(stk , img , coins , linkstk){
+  var x = encodeURI("https://line.me/R/oaMessage/@botstickerlth/?["+stk+"]\nราคา "+coins+"\n"+linkstk+"\nดำเนินการแชร์เรียบร้อยจากคุณ "+liff.getDecodedIDToken().name)
+  var y = encodeURI("https://line.me/R/share?text=["+stk+"]\nราคา "+coins+" บาท\nดำเนินการแชร์เรียบร้อยจากคุณ "+liff.getDecodedIDToken().name)
+  liff.shareTargetPicker(
+    [  {
+    "type": "flex",
+    "altText": "แชร์จาก "+liff.getDecodedIDToken().name,
+    "contents": {
+        "type": "bubble",
+        "size": "giga",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "" + img,
+                  "size": "full",
+                  "aspectMode": "fit",
+                  "align": "start",
+                  "gravity": "center"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "BOTSTICKERLTH by iton5",
+                      "weight": "bold",
+                      "color": "#00b900"
+                    },
+                    {
+                      "type": "separator",
+                      "margin": "md"
+                    },
+                    {
+                      "type": "text",
+                      "text": "" + stk,
+                      "wrap": true,
+                      "margin": "md",
+                      "weight": "bold"
+                    },
+                    {
+                      "type": "box",
+                      "layout": "baseline",
+                      "contents": [
+                        {
+                          "type": "icon",
+                          "url": "https://sv1.picz.in.th/images/2023/09/23/dWmiv5l.png",
+                          "size": "xl",
+                          "offsetTop": "9px"
+                        },
+                        {
+                          "type": "text",
+                          "text": " "+coins+" บาท"
+                        },
+                        {
+                          "type": "icon",
+                          "url": "https://img.icons8.com/?size=48&id=G0Qd3Sb6FPqB&format=gif",
+                          "offsetTop": "9px"
+                        }
+                      ],
+                      "action": {
+                        "type": "uri",
+                        "label": "sharetext",
+                        "uri": y
+                      }
+                    },
+                    {
+                      "type": "separator",
+                      "margin": "md"
+                    },
+                    {
+                      "type": "image",
+                      "url": "https://sv1.picz.in.th/images/2021/09/20/C2zE0D.png",
+                      "animated": true,
+                      "aspectMode": "cover",
+                      "aspectRatio": "19:8",
+                      "size": "full",
+                      "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "" + linkstk
+                      }
+                    },
+                    {
+                      "type": "box",
+                      "layout": "baseline",
+                      "contents": [
+                        {
+                          "type": "icon",
+                          "url": "https://img.icons8.com/?size=80&id=naswWgTwxCN2&format=png",
+                          "size": "xxl",
+                          "margin": "md",
+                          "scaling": true
+                        },
+                        {
+                          "type": "text",
+                          "text": " เพิ่มเพื่อน สั่งซื้อ",
+                          "align": "center",
+                          "color": "#ffffff",
+                          "position": "absolute",
+                          "offsetTop": "2px",
+                          "offsetStart": "50px"
+                        }
+                      ],
+                      "backgroundColor": "#00b900",
+                      "cornerRadius": "10px",
+                      "action": {
+                        "type": "uri",
+                        "label": "add friend",
+                        "uri": x
+                      }
+                    }
+                  ],
+                  "paddingAll": "10px"
+                }
+              ]
+            }
+          ],
+          "paddingAll": "0px"
+        }
+      }
+      }]
+  )
+  .then(function (res) {
+    if (res) {
+
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'ส่งเข้าแชทเรียบร้อย',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      // sending message canceled
+      console.log("TargetPicker was closed!");
+    }
+  })
+  .catch(function (error) {
+    // something went wrong before sending a message
+    console.log("something wrong happen");
+  });
+
+}
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

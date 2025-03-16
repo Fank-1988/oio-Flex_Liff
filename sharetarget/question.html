@@ -1,0 +1,471 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ตอบคำถาม</title>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css" > -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" > -->
+      <!-- <script type="text/javascript" src="https://unpkg.com/tailwindcss-jit-cdn"></script> -->
+  <!-- <script type="text/javascript" src="https://get.mavo.io/stable/mavo.es5.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+  <!-- LineSeed Fonts -->
+  <link href="https://cdn.jsdelivr.net/gh/maketline/goodday/font/stylesheet.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            font-family: 'line_seed_sans_th';
+  
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background: linear-gradient(315deg, #b8c6bd, #1c66d5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: auto;
+    margin: 0;
+   
+}
+
+.quiz-container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 60rem;
+    overflow: auto;
+    margin: 1rem;
+   
+}
+
+h2 {
+    text-align: center;
+    padding: 0.6cm 0;
+    font-size: 2.4rem;
+    color: #333;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul {
+    padding: 0.2rem;
+    list-style-type: none;
+}
+
+
+li {
+    font-size: 2rem;
+    margin: 1.4rem 3rem;
+    color: #1a0402;
+    display: flex;
+    align-items: center;
+    
+}
+
+li::before {
+    /* content: '\2022';  */
+    color: #8d44ad53;
+    font-size: 2rem;
+    margin-right: 1rem;
+ 
+}
+
+button {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    width: 80%;
+    cursor: pointer;
+    font-size: 2rem;
+    font-family: 'line_seed_sans_th';
+    padding: 1.6rem;
+    transition: background-color 0.3s ease;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: #732d91;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div class="flex flex-row relative bg-black/50 items-center shadow-xl m-2 ">
+       <img class="w-20 rounded-full mx-8 my-4" src="https://sv1.picz.in.th/images/2023/03/17/eHZLft.png" alt="avatar" id="profileurl">
+       <p class="p-5 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="displaynamefield">DisplayName</p></div>
+      <div class="quiz-header">
+          <h2 id="question" class="mb-5 text-gray-900 font-bold text-gray-900 dark:text-white">question text</h2>
+          <hr>
+          <ul class="grid w-full gap-6 md:grid-cols-1">
+              <li>
+                  <input type="radio" name="answer" id="a" class="answer hidden peer">
+                  <label for="a" id="a_text" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"> question</label>
+              </li>
+              <li>
+                  <input type="radio" name="answer" id="b" class="answer hidden peer">
+                  <label for="b" id="b_text" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">question</label>
+              </li>
+              <li>
+                  <input type="radio" name="answer" id="c" class="answer hidden peer">
+                  <label for="c" id="c_text" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">question</label>
+              </li>
+              <li>
+                  <input type="radio" name="answer" id="d" class="answer hidden peer"> 
+                  <label for="d" id="d_text" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">question</label>
+              </li>
+          </ul>
+      </div>
+      
+<center><button type="submit" id="submit" class="px-8 py-6 text-3xl font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ส่งคำตอบ</button></center>
+<br/>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+       
+        <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+            var userId = "";
+          
+            window.onload = function() {
+                initializeLiff("1656032875-dMjmJ80q");
+            };
+
+            function initializeLiff(myLiffId) {
+                liff
+                    .init({
+                        liffId: myLiffId
+                    })
+                    .then(() => {
+                      
+                        if (!liff.isInClient() && !liff.isLoggedIn()){
+                            window.alert("กรุณาเข้าสู่ระบบบัญชี LINE ของคุณ");
+                            liff.login();
+                        }else{
+                   
+                            liff.getProfile().then(function(profile) {
+                                document.getElementById('profileurl').src = '' + profile.pictureUrl
+                                document.getElementById('displaynamefield').textContent = '' + profile.displayName + ' ตอบแบบทดสอบดังนี้';
+                              
+                                userId = profile.userId;
+                                if (!liff.isInClient()){
+
+                                }
+                            }).catch(function(error) {
+                                window.alert('Error getting profile: ' + error);
+                            })
+                        }
+
+                    })
+                    .catch((err) => {
+                        document.getElementById('displaynamefield').textContent = err;
+                    });
+            }
+</script>
+  <script>
+    const quizdata = [
+  {
+    question: "อะไรคือปัญหาสิ่งแวดล้อมที่สำคัญที่สุดในปัจจุบัน?",
+    a: 'การเปลี่ยนแปลงสภาพภูมิอากาศ',
+    b: 'การขาดแคลนน้ำ',
+    c: 'การลดปริมาณขยะพลาสติก',
+    d: 'การเสื่อมสภาพป่าชื้น',
+    correct: "a",
+  },
+  {
+    question: "วิธีใดที่เราสามารถลดการปล่อยก๊าซเรือนกระจกลงในบรรยากาศได้?",
+    a: 'การเพิ่มการเปิดใช้พลังงานแสงอาทิตย์',
+    b: 'การเพิ่มการใช้รถยนต์ยนต์ไฟฟ้า',
+    c: 'การลดการใช้แบตเตอรี่',
+    d: 'การเพิ่มการใช้น้ำมันหินอัคนี',
+    correct: "a",
+  },
+  {
+    question: "วิธีการลดการใช้พลาสติกเพื่อลดผลกระทบต่อสิ่งแวดล้อมคืออะไร?",
+    a: 'เพิ่มการผลิตพลาสติก',
+    b: 'ใช้พลาสติกรีไซเคิล',
+    c: 'ทิ้งพลาสติกลงไปในมหาสมุทร',
+    d: 'เผาพลาสติก',
+    correct: "b",
+  },
+  {
+    question: "อะไรเป็นผลกระทบที่สำคัญของการสูญเสียป่าไม้ต่อสิ่งแวดล้อม?",
+    a: 'ลดการทำลายทั่วไป',
+    b: 'ลดการเปลี่ยนแปลงสภาพภูมิอากาศ',
+    c: 'ลดปริมาณขยะพลาสติก',
+    d: 'ลดความหลากหลายชีวภาพ',
+    correct: "d",
+  },
+  {
+    question: "วิธีใดที่ช่วยลดการใช้พลังงานในบ้าน?",
+    a: 'การใช้หลอดไฟคอมพาคท์',
+    b: 'การเพิ่มความอิสระของระบบปรับอากาศ',
+    c: 'การใช้เครื่องซักผ้าแบบใช้น้ำมาก',
+    d: 'การปิดไฟและเครื่องใช้ไฟฟ้าเมื่อไม่ใช้งาน',
+    correct: "b",
+  }
+];
+
+const quizContainer = document.querySelector('.quiz-container'); 
+const answerEls = document.querySelectorAll('.answer');
+const questionEl = document.getElementById('question');
+const a_text = document.getElementById('a_text');
+const b_text = document.getElementById('b_text');
+const c_text = document.getElementById('c_text');
+const d_text = document.getElementById('d_text');
+const submitBtn = document.getElementById('submit');
+
+let currentQuiz = 0;
+let score = 0;
+
+loadQuiz();
+
+function loadQuiz() {
+  const currentQuizData = quizdata[currentQuiz];
+  questionEl.innerHTML = currentQuizData.question;
+  a_text.innerHTML = currentQuizData.a;
+  b_text.innerHTML = currentQuizData.b;
+  c_text.innerHTML = currentQuizData.c;
+  d_text.innerHTML = currentQuizData.d;
+}
+
+function deselectAnswers(){
+  answerEls.forEach(answerEl => answerEl.checked = false);
+}
+
+function getSelected(){
+  let answer;
+  answerEls.forEach(answerEl => {
+    if (answerEl.checked) {
+      answer = answerEl.id;
+    }
+  });
+  return answer;
+}
+
+submitBtn.addEventListener('click', () => {
+  const answer = getSelected();
+  if(answer) {
+    if(answer === quizdata[currentQuiz].correct) {
+      score++;
+    }
+
+    currentQuiz++;
+    if(currentQuiz < quizdata.length) {
+      loadQuiz();
+    } else {
+      quizContainer.innerHTML = `
+      <div class="flex flex-row relative bg-black/50 items-center shadow-xl m-2 ">
+       <img class="w-20 rounded-full mx-8 my-4" src="${liff.getDecodedIDToken().picture}" alt="avatar">
+       <p class="p-5 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${liff.getDecodedIDToken().name}</p></div>
+        <h2 id="question">คำตอบที่คุณตอบถูกทั้งหมด ${score}/${quizdata.length} คำถาม</h2>
+        <center><button class="px-8 py-6 text-3xl font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="sendmsg">ส่งคำตอบ</button></center>
+        <br/>
+      `;
+      // <button class="px-8 py-6 text-3xl font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="location.reload()">เริ่มใหม่</button>
+      document.getElementById("sendmsg").onclick = () =>{
+         var msg = [{
+  "type": "flex",
+  "altText": `คำตอบที่ถูกทั้งหมด ${score}/${quizdata.length} คำถาม`,
+  "contents": {
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "" + liff.getDecodedIDToken().picture,
+                  "aspectMode": "cover",
+                  "size": "full"
+                }
+              ],
+              "cornerRadius": "100px",
+              "width": "72px",
+              "height": "72px"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "แบบทดสอบวัดผล",
+                  "align": "center",
+                  "size": "xl",
+                  "weight": "bold",
+                  "adjustMode": "shrink-to-fit"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "" + liff.getDecodedIDToken().name,
+                      "wrap": true
+                    }
+                  ],
+                  "spacing": "sm",
+                  "margin": "md"
+                }
+              ]
+            }
+          ],
+          "spacing": "xl",
+          "paddingAll": "20px"
+        }
+      ],
+      "paddingAll": "0px"
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "คะแนนทดสอบทั้งหมดของคุณคือ",
+              "color": "#ffffff",
+              "size": "lg",
+              "align": "center",
+              "adjustMode": "shrink-to-fit"
+            }
+          ],
+          "backgroundColor": "#06c755"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": " ",
+                  "size": "xl",
+                  "weight": "bold",
+                  "contents": [
+                    {
+                      "type": "span",
+                      "text": `${score} `,
+                      "color": "#0069d9",
+                      "size": "xxl"
+                    },
+                    {
+                      "type": "span",
+                      "text": "/ ",
+                      "weight": "bold"
+                    },
+                    {
+                      "type": "span",
+                      "text": `${quizdata.length} คะแนน`
+                    }
+                  ],
+                  "align": "center"
+                }
+              ]
+            }
+          ],
+          "paddingAll": "10px"
+        },
+        {
+          "type": "separator"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "เริ่มทำแบบทดสอบใหม่",
+                "uri": "line://app/1656032875-dMjmJ80q?linkurl=https://allaboutitappscript.github.io/linetools/sharetarget/question.html"
+              },
+              "height": "sm",
+              "style": "primary",
+              "color": "#0069d9"
+            }
+          ],
+          "paddingAll": "10px",
+          "paddingStart": "50px",
+          "paddingEnd": "50px"
+        }
+      ],
+      "paddingAll": "0px"
+    }
+  }
+}]
+  Swal.fire(
+   'ดำเนินการสำเร็จ',
+   'คุณได้ส่งคำตอบเรียบร้อยแล้ว',
+   'success'
+ ).then((result)=>{
+        sendText(msg)     
+ })
+      
+      }
+     
+      
+    }
+  }
+});
+  function sendText(text) {
+        if (!liff.isInClient()) {
+          shareTargetPicker(text);
+        } else {
+          sendflex(text);
+        }
+      }
+function sendflex(text){
+  liff.sendMessages(text).then(function(){
+    liff.closeWindow()
+  })
+}
+     function shareTargetPicker(text) {
+        liff.shareTargetPicker(text).then(function (res) {
+    if (res) {
+      liff.closeWindow();
+    } else {
+      // sending message canceled
+      console.log("TargetPicker was closed!");
+    }
+  }).catch(function (error) {
+          window.alert("Failed to send message " + error);
+        });
+      }
+  </script>
+</body>
+
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Flex Message Sender</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function sendFlexMessage(products) {
+      var flexMessage = createFlexMessage(products);
+      sendLineMessage(flexMessage);
+    }
+
+    function createFlexMessage(products) {
+      return {
+        "type": "flex",
+        "altText": "รายการสินค้า",
+        "contents": {
+          "type": "carousel",
+          "contents": products.map(product => ({
+            "type": "bubble",
+            "hero": {
+              "type": "image",
+              "url": product.linkimage,
+              "size": "full",
+              "aspectRatio": "1:1",
+              "aspectMode": "cover"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": product.productname,
+                  "weight": "bold",
+                  "size": "xl"
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "margin": "md",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": product.details,
+                      "wrap": true,
+                      "size": "md",
+                      "flex": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "button",
+                  "style": "link",
+                  "height": "sm",
+                  "action": {
+                    "type": "uri",
+                    "label": product.button,
+                    "uri": product.orderlink
+                  }
+                }
+              ],
+              "flex": 0
+            }
+          }))
+        }
+      };
+    }
+
+    function sendLineMessage(flexMessage) {
+      liff.init({
+        liffId: '1656032875-dMjmJ80q'
+      }).then(() => {
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        } else {
+          liff.shareTargetPicker([flexMessage]).then(() => {
+            Swal.fire({
+              title: 'สำเร็จ!',
+              text: 'ส่งข้อความเรียบร้อยแล้ว',
+              icon: 'success',
+              confirmButtonText: 'ตกลง'
+            }).then(() => {
+              liff.closeWindow();
+            });
+          }).catch((err) => {
+            console.error('Error sending message: ', err);
+          });
+        }
+      }).catch((err) => {
+        console.error('LIFF initialization failed: ', err);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('https://script.google.com/macros/s/AKfycbzqC2U_3X548ZH-c0fyW2xnwyqpMGO_287XHiB7nzmbrSuYMwdL7nNEYuKfd6-NkGYXiA/exec')
+        .then(response => response.json())
+        .then(data => {
+          sendFlexMessage(data);
+        })
+        .catch(error => {
+          console.error('Error fetching products: ', error);
+        });
+    });
+  </script>
+</head>
+<body>
+  <h1>ส่ง Flex Message</h1>
+</body>
+</html>

@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+  <html>
+
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+          <style type="text/css">
+        body {
+            min-height: 100%;
+  background-color: #F3F4F6;
+            font-family: 'line_seed_sans_th';
+          
+        }
+    
+.box {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width:  350px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  animation-delay: 1s;
+  animation: slide-up 300ms ease-in-out;
+}
+
+@keyframes slide-up {
+   from {
+    transform: translateY(100%);
+  }
+  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-wrapper {
+  height: 130px;
+  margin-bottom: 1rem;
+}
+
+
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem 2rem 0;
+}
+
+.box-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+}
+
+.cta {
+  flex: 1;
+  padding: 1rem;
+  background-color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+
+.cta:focus, .cta:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.cta:focus {
+  outline-offset: -10px;
+}
+
+.cta:last-of-type {
+  text-transform: uppercase;
+}
+
+   
+    .banner {
+  animation: bounceActive 1s ease-in-out both;
+  animation-delay: 2s;
+}
+.banner.close {
+  animation: hidden 1s ease-in-out both;
+}
+@keyframes bounceActive {
+  0% {
+    transform: translate(0, -60px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.75;
+    transform: translate(0, 10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+}
+.banner {
+  animation: bounceActive 1s ease-in-out both;
+  animation-delay: 2s;
+}
+@keyframes hidden {
+  100% {
+    transform: translate(0, -60px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.75;
+    transform: translate(0, 10px);
+  }
+  0% {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+}  
+/*       -------------- */
+      
+.panel-container {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  font-size: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  max-width: 400px;
+}
+
+.panel-container strong {
+  line-height: 20px;
+}
+
+.ratings-container {
+  display: flex;
+  margin: 20px 0;
+}
+
+.rating {
+  flex: 1;
+  cursor: pointer;
+  padding: 20px;
+  margin: 10px 5px;
+}
+
+.rating:hover,
+.rating:active {
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rating img {
+  width: 40px;
+}
+
+.rating small {
+  color: #555;
+  display: inline-block;
+  margin: 10px 0 0;
+}
+
+.rating:hover small,
+.rating:active small {
+  color: #111;
+}
+
+.btn {
+  background-color: #302d2b;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  padding: 12px 30px;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.fa-heart {
+  color: red;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+      </style>
+      <title>Feedback for LIFF</title>
+    </head>
+
+    <body>
+
+
+      <section class="h-16 bg-blue-500 flex items-center justify-between px-7 w-full banner">
+        <div class="wrapper-left flex justify-between items-center space-x-5">
+          <div class="rounded-full container-img  text-white w-10 h-10 flex justify-center items-center rounded-lg ">
+            <img
+              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjg5ajlhemdyZjlrZDgwdjMwbTl1dGdtbnhvM2p4Y2t0ZnpnZnE4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l150Tal3EKqgj0v9gs/giphy.gif"
+              class="rounded-full" alt="" id="pictureUrl">
+
+          </div>
+
+          <div class="text-white font-medium flex">
+            <h1 id="displayName">...</h1>
+          </div>
+        </div>
+        <div class="wrapper-right text-white flex justify-between items-center">
+          <button class="bg-blue-500 group hover:translate-y-[-2px] flex space-x-2 transition-all duration-150 ease-in-out hover:bg-blue-600 shadow-md shadow-blue-700 rounded-full px-4 py-1" id="button">
+            <span class="group-hover:text-white" >แชร์</span>
+            <span class="group-hover:hidden">😄</span>
+            <span class="group-hover:block hidden">😀</span>
+          </button>
+          <button id="btn-close" class="p-2 focus:outline-none focus:bg-blue-400 focus:text-gray-900 rounded-md ml-2">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </section>
+      <center>
+        <div id="panel" class="panel-container">
+          <strong
+          >ช่วยประเมินความพึงพอใจกับทางร้านเรา <br />
+            ทุกการประเมินทำให้เราได้พัฒนาบริการให้ดียิ่งขึ้น</strong>
+          <div class="ratings-container">
+            <div class="rating">
+              <img
+                src="https://img.icons8.com/?size=48&id=rLgArJf4PX8O&format=png"
+                alt=""
+              />
+              <small>ไม่พอใจ</small>
+            </div>
+            <div class="rating">
+              <img
+                src="https://img.icons8.com/?size=48&id=76vCxuGKyTQO&format=png"
+                alt=""
+              />
+              <small>เฉยๆ</small>
+            </div>
+
+            <div class="rating active">
+              <img
+                src="https://img.icons8.com/?size=48&id=6mcux5vUOw6v&format=png"
+                alt=""
+              />
+              <small>ดีมาก</small>
+            </div>
+          </div>
+          <button class="btn mt-4" id="send">ส่งประเมิน</button>
+        </div>
+      </center>
+
+      <script>
+        async function main() {
+       const liffId = '1656032875-dMjmJ80q'
+        await liff.init({liffId: liffId});
+
+
+        if (!liff.isLoggedIn()) {
+     const destinationUrl = window.location.href;
+        liff.login({redirectUri: destinationUrl });
+     }
+       
+      liff.ready.then(() => {
+          document.getElementById('pictureUrl').src = '' + liff.getDecodedIDToken().picture;
+        document.getElementById('displayName').textContent = '' + liff.getDecodedIDToken().name;
+      
+});
+   
+    
+
+     }
+
+        main();
+
+
+
+        const btnCerrar = document.getElementById("btn-close");
+        const banner = document.querySelector(".banner");
+btnCerrar.addEventListener("click", () => {
+          banner.classList.toggle("close");
+});
+setInterval(() => {
+  if (banner.classList.contains("close")) {
+          banner.classList.toggle("close");
+  }
+
+}, 4000);
+
+        document.querySelector("#button").addEventListener("click", function (e) {
+          party.confetti(this);
+        const msg = [{"type":"flex",
+        "altText": "Feedback",
+        "contents": {
+          "type": "bubble",
+        "hero": {
+          "type": "image",
+        "url": "https://i.pinimg.com/236x/14/e5/1f/14e51f1c88602662d0eaad7f9f1bf69a.jpg",
+        "size": "full",
+        "aspectRatio": "16:9",
+        "aspectMode": "cover"
+  },
+        "body": {
+          "type": "box",
+        "layout": "vertical",
+        "contents": [
+        {
+          "type": "box",
+        "layout": "vertical",
+        "contents": [
+        {
+          "type": "text",
+        "text": "แบบประเมินความพึงพอใจ",
+        "align": "center",
+        "wrap": true,
+        "weight": "bold",
+        "color": "#00be00"
+          }
+        ]
+      },
+        {
+          "type": "separator",
+        "margin": "lg"
+      },
+        {
+          "type": "box",
+        "layout": "vertical",
+        "contents": [
+        {
+          "type": "text",
+        "text": "Click",
+        "wrap": true,
+        "weight": "bold",
+        "align": "center"
+          }
+        ],
+        "borderWidth": "2px",
+        "borderColor": "#00be00",
+        "margin": "lg",
+        "cornerRadius": "20px",
+        "paddingAll": "10px",
+        "action": {
+          "type": "uri",
+        "label": "action",
+        "uri": "https://liff.line.me/1656032875-dMjmJ80q?linkurl=https://allaboutitappscript.github.io/linetools/sharetarget/estimatess.html"
+        }
+      }
+        ]
+  }
+}
+                     }]
+        liff.shareTargetPicker(msg).then((res) => {
+      if (res) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "ส่งเข้าแชทเรียบร้อย",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            window.location.replace(url)
+
+          });
+      } else {
+          console.log("TargetPicker was closed!");
+      }
+    })
+        .catch(function (error) {
+          window.alert("Failed to send message " + error);
+    });
+});
+
+        const ratings = document.querySelectorAll('.rating'),
+        ratingsContainer = document.querySelector('.ratings-container'),
+        sendBtn = document.querySelector('#send'),
+        panel = document.querySelector('#panel');
+        let selectedRating = 'ดีมาก';
+
+ratingsContainer.addEventListener('click', (e) => {
+  if (e.target.parentNode.classList.contains('rating')) {
+          removeActive();
+        e.target.parentNode.classList.add('active');
+        selectedRating = e.target.nextElementSibling.innerHTML;
+  }
+});
+
+sendBtn.addEventListener('click', (e) => {
+
+          panel.innerHTML = `
+   <img
+            src="https://img.icons8.com/?size=48&id=V4c6yYlvXtzy&format=gif"
+            alt=""
+          />
+
+    <strong>Thank You!</strong>
+    <br>
+    <strong>Feedback: ${selectedRating}</strong>
+    <p>ขอบคุณสำหรับการประเมินความพึงพอใจ</p>
+  `;
+        const userId = liff.getDecodedIDToken().sub
+        const name = liff.getDecodedIDToken().name
+        const picture = liff.getDecodedIDToken().picture
+        const feedback = selectedRating
+        sendToSheet(userId, name, picture, feedback)
+});
+
+        function removeActive() {
+  for (let i = 0; i < ratings.length; i++) {
+          ratings[i].classList.remove('active');
+  }
+}
+        async function sendToSheet(userId, name, picture, feedback) {
+           
+            try {
+                const response = await $.post('https://script.google.com/macros/s/AKfycbzCduo9PXiQYlw3ltVYC5IhxvpEtm9tSK9_9cOuAdfY0CYbdRUgYUE92hEskrHSYQHQOg/exec', {
+          feedback: feedback,
+        userId: userId,
+        name: name,
+        picture: picture
+                });
+
+        if (response.statusCode === 200) {
+                    const flexMessage = JSON.parse(response.body);
+                    Swal.fire('ดำเนินการสำเร็จ', 'ขอบคุณสำหรับการประเมิน', 'success').then(() => {
+          sendMessages([flexMessage]);
+                    });
+                }
+            } catch (error) {
+          console.error('Error sending data to sheet', error);
+                
+            }
+        }
+
+        async function sendMessages(msg) {
+            try {
+          await liff.sendMessages(msg);
+        Swal.fire({
+          position: "top-end",
+        icon: "success",
+        title: "ส่งเข้าแชทเรียบร้อย",
+        showConfirmButton: false,
+        timer: 1500,
+                }).then(() => {
+          liff.closeWindow();
+                });
+            } catch (error) {
+          console.error('Error sending messages', error);
+            }
+        }
+      </script>
+    </body>
+
+  </html>

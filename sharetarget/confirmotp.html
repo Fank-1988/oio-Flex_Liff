@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://bit.ly/fontiton5"
+      type="text/css"
+      charset="utf-8"
+    />
+    <style type="text/css">
+        body {
+            min-height: 100%;
+  background-color: #F3F4F6;
+            font-family: 'line_seed_sans_th';
+        }
+    
+.box {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width:  350px;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  animation-delay: 1s;
+  animation: slide-up 300ms ease-in-out;
+}
+
+@keyframes slide-up {
+   from {
+    transform: translateY(100%);
+  }
+  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-wrapper {
+  height: 130px;
+  margin-bottom: 1rem;
+}
+
+
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem 2rem 0;
+}
+
+.box-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+}
+
+.cta {
+  flex: 1;
+  padding: 1rem;
+  background-color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+
+.cta:focus, .cta:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.cta:focus {
+  outline-offset: -10px;
+}
+
+.cta:last-of-type {
+  text-transform: uppercase;
+}
+
+   
+    </style>
+    <title>New Promotion</title>
+ </head>
+<body class="bg-gradient-to-tr from-red-950 to-teal-700 flex justify-center items-center min-h-screen p-4">
+
+  <div class="bg-black/60 backdrop-blur-md text-white ring-8 ring-black/5 Xborder border-black/50 p-12 flex flex-col gap-6 shadow-lg rounded-xl w-full max-w-lg text-center relative overflow-hidden">
+
+    <h1 class="text-xl font-bold tracking-wider">Verify your mobile number</h1>
+    <div class="text-xs space-y-2 *:leading-6">
+      <p>We have sent an SMS with your unique 4 digit code to your number ending in <strong>******77</strong>.</p>
+      <p>Enter the code below to confirm your phone number.</p>
+    </div>
+
+    <div class="flex gap-3 sm:gap-6 justify-center 
+                *:bg-black/10
+                *:text-white
+                *:border
+                *:border-white/30
+                *:rounded-xl
+                *:py-2
+                *:px-2
+                *:text-3xl
+                *:max-w-12
+                sm:*:py-4
+                sm:*:px-4
+                sm:*:text-6xl
+                sm:*:max-w-20
+                *:text-center
+                *:transition-all
+                *:duration-300
+                focus-visible:*:bg-black/90 
+                Xfocus-visible:*:outline-white
+                Xfocus-visible:*:outline-dashed
+                Xfocus-visible:*:outline-3
+                Xfocus-visible:*:outline-offset-4
+                *:outline-none
+                *:ring-0
+            ">
+      <input type="text" placeholder="0" id="num-1" placeholder="0" maxlength="1" data-code-input>
+      <input type="text" placeholder="0" id="num-2" placeholder="0" maxlength="1" data-code-input>
+      <input type="text" placeholder="0" id="num-3" placeholder="0" maxlength="1" data-code-input>
+      <input type="text" placeholder="0" id="num-4" placeholder="0" maxlength="1" data-code-input>
+    </div>
+
+    <!--<p class="text-xs py-3 px-6 bg-amber-800 rounded-md">Make sure to keep this window open while checking your code</p>-->
+    <button type="button" id="btn-new-code" class="w-fit mx-auto border border-white/30 bg-black/30  rounded-md py-2 px-4 uppercase font-thin transition-all duration-300 relative isolate overflow-hidden  hover:text-white focus-visible:text-white outline-none ring-0
+                before:absolute
+                before:-z-10
+                before:inset-[100%_0]
+                before:bg-red-900
+                before:transition-all
+                before:duration-300
+                hover:before:inset-0
+                focus-visible:before:inset-0
+
+            ">send new code</button>
+
+    <div id="panel-msg-top" class="absolute inset-[0_0_50%_0] top-0 p-12 pb-6 text-center  space-y-6 bg-black text-white transition-all duration-500 ease-in-out -translate-y-full">
+      <svg class="w-32 mx-auto text-red-700" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect>
+        <path d="M24 4L29.2533 7.83204L35.7557 7.81966L37.7533 14.0077L43.0211 17.8197L41 24L43.0211 30.1803L37.7533 33.9923L35.7557 40.1803L29.2533 40.168L24 44L18.7467 40.168L12.2443 40.1803L10.2467 33.9923L4.97887 30.1803L7 24L4.97887 17.8197L10.2467 14.0077L12.2443 7.81966L18.7467 7.83204L24 4Z" fill="currentColor" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M17 24L22 29L32 19" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+
+      </svg>
+
+    </div>
+    <div id="panel-msg-bottom" class="absolute inset-[50%_0_0_0] bottom-0 p-12 pt-6 text-center  space-y-6 bg-black text-white transition-all duration-500 ease-in-out translate-y-full">
+
+      <h2 class="font-bold text-2xl">You have verified your phone number successfully.</h2>
+      <p>You can now go and do something else</p>
+    </div>
+  </div>
+
+  <div class="box" id="cookieBox">
+  <div class="box-header">
+  <h2 class="text-2xl text-red-500 font-semibold">Promotion!</h2>
+    <div class="image-wrapper">
+      <img src="https://cdn-icons-png.flaticon.com/128/3600/3600488.png" width="130" height="130"/>
+        
+
+    </div>
+  <p>ลดราคาสำหรับคุณ <br><span id="displayName">...</span> </p>
+</div>
+  <div class="box-footer">
+    <button class="cta">
+      Privacy Policy
+    </button>
+    <button class="cta" id="okButton">
+      Close
+    </button>
+  </div>
+<div>
+     <script>
+        document.getElementById('okButton').addEventListener('click', function() {
+            document.getElementById('cookieBox').style.display = 'none';
+        });
+    </script>
+   <script>
+
+     async function main() {
+       const liffId = '1656032875-dMjmJ80q'
+     await liff.init({ liffId: liffId});
+       
+
+     if (!liff.isLoggedIn()) {
+     const destinationUrl = window.location.href;
+     liff.login({ redirectUri: destinationUrl });
+     }
+       
+      liff.ready.then(() => {
+     document.getElementById('pictureUrl').src = '' + liff.getDecodedIDToken().picture;
+        document.getElementById('displayName').textContent = '' + liff.getDecodedIDToken().name;
+      
+       
+        
+        
+});
+   
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.get('type')
+    if(key == "shop"){
+      const buy = document.getElementById("buy");
+      buy.onclick = () => {
+        const url = urlParams.get("url")
+        const link = encodeURI("https://liff.line.me/"+ liffId +"?type=shop&url=" + url)
+        const msg = [{"type":"flex",
+                     "altText": "Promotion",
+                     "contents": {
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "https://developers-resource.landpress.line.me/fx/img/01_2_restaurant.png",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "https://line.me/"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "md",
+    "action": {
+      "type": "uri",
+      "uri": "https://line.me/"
+    },
+    "contents": [
+      {
+        "type": "text",
+        "text": "Brown's Burger ลดราคา",
+        "size": "xl",
+        "weight": "bold"
+      },
+      {
+        "type": "text",
+        "text": "Sauce, Onions, Pickles, Lettuce & Cheese",
+        "wrap": true,
+        "color": "#aaaaaa",
+        "size": "xxs"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "color": "#905c44",
+        "margin": "xxl",
+        "action": {
+          "type": "uri",
+          "label": "Click",
+          "uri": link
+        }
+      }
+    ]
+  }
+}
+                     }]
+        liff.shareTargetPicker(msg).then((res) => {
+      if (res) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "ส่งเข้าแชทเรียบร้อย",
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          window.location.replace(url)
+          
+        });
+      } else {
+        console.log("TargetPicker was closed!");
+      }
+    })
+    .catch(function (error) {
+      window.alert("Failed to send message " + error);
+    });
+          
+        }
+    }
+      
+      
+
+
+
+     }
+
+     main();
+     
+
+   </script>
+  <script>
+  const inputEl1 = document.querySelector("#num-1");
+const inputEl2 = document.querySelector("#num-2");
+const inputEl3 = document.querySelector("#num-3");
+const inputEl4 = document.querySelector("#num-4");
+const panelMsgTop = document.querySelector("#panel-msg-top");
+const panelMsgBottom = document.querySelector("#panel-msg-bottom");
+const codeInputs = document.querySelectorAll('[data-code-input]');
+
+
+let newToastEl = '';
+let currentCode = '';
+// auto toast
+function showMeTheToast() {
+    currentCode = Math.floor(Math.random() * 9000) + 1000;
+
+    newToastEl = document.createElement("div");
+    newToastEl.className = "absolute top-4 right-4 transition-all duration-300 ease-in-out border border-black/30 rounded-xl p-4 text-center text-sm bg-black/90 text-white -translate-y-72 space-y-2";
+    const titleEl = document.createElement("p");
+    titleEl.className = "text-sm";
+    titleEl.innerText = "Your one time code is:";
+
+    const codeEl = document.createElement("div");
+    codeEl.className = 'flex gap-2 items-center justify-center text-xl font-bold';
+    const codeCopyBtn = document.createElement("button");
+    codeCopyBtn.className = "material-symbols-outlined text-base font-normal";
+    codeCopyBtn.innerText = "content_copy"
+    codeCopyBtn.title ="click to copy code"
+    codeEl.innerText = currentCode;
+    codeEl.append(codeCopyBtn);
+
+    const footerEl = document.createElement("p");
+    footerEl.className = "text-xs";
+    footerEl.innerText = "This code will expire in 10 minutes";
+
+    newToastEl.append(titleEl)
+    newToastEl.append(codeEl)
+    newToastEl.append(footerEl)
+
+    // Append the element to the body
+    document.body.appendChild(newToastEl);
+    // reveal toast
+    setTimeout(() => newToastEl.classList.remove("-translate-y-72"), 300)
+
+    // button to copy code
+    codeCopyBtn.addEventListener("click", () => copyCode(currentCode))
+}
+// copy code to codeInputs
+function copyCode(code) {
+    const codeArr = String(code).split("");
+    inputEl1.value = codeArr[0];
+    inputEl2.value = codeArr[1];
+    inputEl3.value = codeArr[2];
+    inputEl4.value = codeArr[3];
+
+    // call checkcode function after a short delay to simulate processing
+    setTimeout(() => {
+        checkCode()
+        removeToast()
+    }, 1000);
+
+}
+// remove the toas from te dom
+function removeToast() {
+    if (newToastEl) {
+        //console.log("remove toast...")
+        newToastEl.classList.add("scale-0");
+        setTimeout(() => newToastEl.remove(), 300)
+    }
+}
+// reset input values
+function resetAll() {
+    inputEl1.value = "";
+    inputEl2.value = "";
+    inputEl3.value = "";
+    inputEl4.value = "";
+    
+    // unset current code
+    currentCode = '';
+}
+
+// Call the function after 3 seconds
+setTimeout(showMeTheToast, 1000);
+
+// send new code
+document.querySelector("#btn-new-code").addEventListener("click", () => {
+    // remove existing toast
+    removeToast()
+    // reset codeInputs
+    resetAll()
+    // send new code
+    setTimeout(showMeTheToast, 1000);
+});
+
+// Function to check if the input values match the specific 4-digit code
+function checkCode() {
+    
+    const num1 = document.getElementById('num-1').value;
+    const num2 = document.getElementById('num-2').value;
+    const num3 = document.getElementById('num-3').value;
+    const num4 = document.getElementById('num-4').value;
+    // Check if all codeInputs have content
+    if (num1 && num2 && num3 && num4) {
+        // Combine the input values into a single string
+        const inputCode = num1 + num2 + num3 + num4;
+        if (inputCode == "") return;
+     
+        
+        // Check if the input code matches the specific code
+        setTimeout(() => {
+            if (inputCode == currentCode) {
+                // Call another function if the codes match
+                codeValid();
+            } else {
+                codeNotValid();
+            }
+        }, 1000);
+    }
+}
+
+// code is correct - show message
+function codeValid() {
+    panelMsgTop.classList.remove("-translate-y-full")
+    panelMsgBottom.classList.remove("translate-y-full")
+    setTimeout(() => {
+        panelMsgTop.classList.add("-translate-y-full")
+        panelMsgBottom.classList.add("translate-y-full")
+        // remove existing toast
+        removeToast()
+
+        // reset values
+        resetAll()
+    }, 3000)
+}
+
+// code is not valid - show new toast
+function codeNotValid() {
+    // remove existing toast
+    removeToast()
+    // reset
+    resetAll()
+    // generate alert toast (delay to preven it getting removed by the timeout)
+    setTimeout(() => generateToast("The code is not valid. Please request a new one."),510)
+}
+
+// Utility - numbers only
+function onlyNumberKey(evt) {
+    var inputValue = evt.target.value;
+    var newValue = inputValue.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    evt.target.value = newValue;
+}
+
+// code inputs events
+codeInputs.forEach((input, index) => {
+    input.addEventListener('input', function (e) {
+        // only allow numbers
+        onlyNumberKey(e);
+        // check code is valid
+        checkCode()
+
+        // move to next ig it has a value and it's not the last input
+        if (this.value && index < codeInputs.length - 1) {
+            codeInputs[index + 1].focus();
+        }
+    });
+});
+
+function generateToast(msg) {
+    newToastEl = document.createElement("div");
+    newToastEl.className = "absolute top-4 right-4 transition-all duration-300 ease-in-out border border-black/30 rounded-xl p-4 text-center text-sm bg-red-900 text-white -translate-y-72 w-56";
+    const titleEl = document.createElement("p");
+    titleEl.className = "text-sm";
+    titleEl.innerText = msg;
+
+    newToastEl.append(titleEl);
+
+    // Append the element to the body
+    document.body.appendChild(newToastEl);
+    // reveal toast
+    setTimeout(() => newToastEl.classList.remove("-translate-y-72"), 0)
+}
+  </script>
+ </body>
+</html>

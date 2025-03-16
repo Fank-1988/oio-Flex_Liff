@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+    <style type="text/css">
+        body {
+            font-family: 'line_seed_sans_th';
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 min-h-screen flex items-center justify-center">
+  <div id="marketing-banner" tabindex="-1"
+        class="fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600">
+        <div data-aos="fade-down-right" class="flex flex-col items-start mb-3 mr-4 md:items-center md:flex-row md:mb-0">
+            <a href="https://line.me/ti/p/~@botstickerlth"
+                class="flex items-center mb-2 border-gray-200 md:pr-4 md:mr-4 md:border-r md:mb-0 dark:border-gray-600">
+                <img src="https://sv1.picz.in.th/images/2022/02/24/rxSvTE.jpg" class="h-6 mr-2" alt="Flowbite Logo">
+                <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">Gramline</span>
+            </a>
+            <p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">บริการที่ปรึกษาทางธุรกิจ ,
+                สอนแบบจับมือทำ และ พัฒนา solution ด้วย LINE OA + API</p>
+        </div>
+        <div class="flex items-center flex-shrink-0">
+            <a href="https://www.line-community.me/en/apiexpert/detail/6242a59ad5929a6a500508c9"
+                class="px-5 py-2 mr-2 text-xs font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">รับรองจากประเทศญี่ปุ่น</a>
+            <button data-dismiss-target="#marketing-banner" type="button"
+                class="flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span class="sr-only">Close banner</span>
+            </button>
+        </div>
+    </div>
+  
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 animate__animated animate__fadeIn" data-aos="fade-up"
+    data-aos-duration="3000">
+      <div class="flex items-center space-x-4" data-aos="flip-up" data-aos-duration="2000">
+         <img id="profileurl" class="w-20 h-20 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="https://sv1.picz.in.th/images/2023/03/17/eHZLft.png" alt="Rounded avatar"> <span  id="NameLine"> ...</span>
+         </div>
+        <h1 class="text-3xl font-semibold text-gray-800 mb-4">Login เข้าสู่ระบบ<i class="fas fa-sign-in-alt"></i></h1>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-600 flex items-center">
+                    <i class="fas fa-user mr-2"></i>
+                    Username
+                </label>
+                <input type="text" id="username" name="username" class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400" placeholder="โปรดกรอก username">
+                <div id="usernameAlert" class="text-red-500 text-sm mt-1 hidden">จำเป็นต้องกรอก</div>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-600 flex items-center">
+                    <i class="fas fa-lock mr-2"></i>
+                    Password
+                </label>
+                <input type="password" id="password" name="password" class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-400" placeholder="โปรดกรอก password">
+                <div id="passwordAlert" class="text-red-500 text-sm mt-1 hidden">จำเป็นต้องกรอก</div>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300 transform hover:scale-105">Login</button>
+        </form>
+        <p class="text-gray-600 mt-4 text-center">ติดต่อสอบถามเพิ่มเติม <a href="tel:0987654321"
+                class="text-blue-600 hover:underline">Click</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        $(document).ready(function () {
+            AOS.init();
+          var liffId = "1656032875-dMjmJ80q";  
+          
+            var returnUrl = "https://db.iton5.repl.co/studyform.html";
+         
+            
+            // liff
+            liff.init({
+                // liffId
+                liffId: liffId
+            }).then(() => {
+                // loader
+               document.getElementById('profileurl').src = '' + liff.getDecodedIDToken().picture
+              document.getElementById('NameLine').textContent = '' + liff.getDecodedIDToken().name
+
+              $("#loginForm").submit(function (event) {
+                event.preventDefault();
+
+                var username = $("#username").val();
+                var password = $("#password").val();
+
+                $("#usernameAlert").addClass("hidden");
+                $("#passwordAlert").addClass("hidden");
+
+                if (username === "") {
+                    $("#usernameAlert").removeClass("hidden").text("จำเป็นต้องกรอก");
+                } else if (username.length < 3  || !/\d/.test(username)) {
+                    $("#usernameAlert").removeClass("hidden").text("Invalid username format.");
+                }
+
+                if (password === "") {
+                    $("#passwordAlert").removeClass("hidden").text("จำเป็นต้องกรอก");
+                } else if (password.length < 6) {
+                    $("#passwordAlert").removeClass("hidden").text("Password should be at least 6 characters.");
+                }
+                if (username == "iton5" && password == "123456789" && password.length >= 6) {
+                  Toastify({
+                        text: "Logged in successfully!",
+                        duration: 3000, 
+                        gravity: "top", 
+                        position: "center", 
+                        backgroundColor: "#4caf50", 
+                    }).showToast();
+                   // require
+                if (liff.isInClient() == false) { window.location = returnUrl; return; }
+                if (liff.isLoggedIn() == false) { window.location = returnUrl; return; }
+                // signin
+                var signinURL = new URL("https://store.line.me", window.location.href);
+                signinURL.searchParams.append("returnUrl", returnUrl);
+                // signinURL.searchParams.append("access_token", liff.getAccessToken());
+                // signinURL.searchParams.append("id_token", liff.getIDToken());
+                window.location = signinURL.href;
+                liff.sendMessages([{
+                'type': 'text',
+                'text': signinURL.href
+            }]).then(function () {
+                liff.closeWindow();
+                 
+            })
+
+                  
+                    } else {
+                  Toastify({
+                        text: "Login ไม่สำเร็จ คลิกที่นี่เพื่อลงทะเบียนใหม่",
+                        
+                        gravity: "top", 
+                        position: "center", 
+                        backgroundColor: "#ff0000", 
+                    onClick: function(){window.location = returnUrl; return;},
+                    duration: 3000, 
+                    }).showToast();
+
+                    liff.sendMessages([{
+                'type': 'text',
+                'text': "ติดต่อเราซิ"
+            }]).then(function () {
+                // liff.closeWindow();
+                Toastify({
+                        text: "Login ไม่สำเร็จ ส่งข้อความลงไปแล้ว",
+                         duration: 3000, 
+                        gravity: "top", 
+                        position: "center", 
+                      style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+                   
+                    }).showToast(); 
+            })
+                  
+        }
+              
+               
+              })
+
+
+              
+            })
+        
+
+
+              
+                
+            })
+           
+       
+    </script>
+</body>
+</html>

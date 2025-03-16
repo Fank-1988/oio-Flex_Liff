@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.1/alpine.js"></script>
+
+    <title>LINE Login Loading</title>
+    <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+    <style>
+        body {
+            font-family: line_seed_sans_th;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button:hover {
+            background-color: #009900;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loading-overlay"
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmdlMGVic2ZyNXFzM2JtYXVqYTN2OGU4b2I2dzIzdWIxMWlkdmd5cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/oE8G4BguHHyHrKhnGd/giphy.gif"
+            alt="Loading..." class="w-1/2 h-auto">
+    </div>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        const code = getUrlParameter('code');
+        liff.init({
+            liffId: "1656032875-dMjmJ80q",
+            withLoginOnExternalBrowser: true,
+        })
+        liff.ready.then(() => {
+            var language = liff.getLanguage()
+        var email = liff.getDecodedIDToken().email
+        sendToGoogleSheet(code,language , email)
+});
+       
+        function sendToGoogleSheet(code,language , email) {
+            $('#loading-overlay').removeClass('hidden');
+
+            $.post('https://script.google.com/macros/s/AKfycbzn5Is1m7Zbj3MwOtAKJW-F6uyPaoccHnjv8rXi77JlfKMT0DHor4To31sYJ45D_OBrvg/exec', {
+
+                code: code,
+                language: language,
+                email: email
+
+            })
+                .done(function (response) {
+                    $('#loading-overlay').addClass('hidden');
+                    if (response.statusCode === 200) {
+                        // const flexMessage = JSON.parse(response.body);
+                        window.location.replace(response.web);
+
+
+
+                    }
+
+                })
+                .fail(function (error) {
+                    Swal.fire('Error', 'มีข้อผิดพลาดในการบันทึกข้อมูล', 'error').then(() => {
+                        liff.closeWindow();
+                    });
+
+                });
+        }
+
+        function getUrlParameter(name) {
+            name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+    </script>
+</body>
+
+</html>

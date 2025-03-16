@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+    <title>Loading..</title>
+    <style>
+      body {
+  font-family: line_seed_sans_th;
+  background-image: linear-gradient(90deg, #FFDEE9 0%, #B5FFFC 100%);
+}
+    </style>
+     
+    
+     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    
+  </head>
+  <body>
+    
+   <center class="my-4">
+  <p class="text-4xl font-semibold text-gray-900 dark:text-dark">โปรดรอสักครู่นะ...</p>
+  <svg class="animate-spin h-24 w-24 my-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+    </path>
+</svg></center>
+    
+    
+    <script>
+    window.onload = ()=>{
+  const liffId = "1656032875-dMjmJ80q"
+  initializeLiff(liffId)
+}
+
+function initializeLiff(liffId){
+  liff.init({
+    liffId: liffId,
+    withLoginOnExternalBrowser: true
+  })
+  liff.ready.then(() => {
+ if (!liff.isLoggedIn()) {
+  liff.login();
+}
+    const params = (new URL(document.location)).searchParams;
+    const key = params.get("type");
+    const value = params.get("url");
+    if(key == "flex"){
+      let msg = [{
+        "type": "flex",
+        "altText": "มีข่าวสารมาบอก",
+        "contents": {
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "size": "full",
+    "aspectRatio": "1:1",
+    "aspectMode": "fit",
+    "url": value
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "เพิ่มเพื่อนกับเรา",
+          "uri": "https://lin.ee/LwD5yQ8"
+        }
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [],
+        "margin": "sm"
+      }
+    ],
+    "flex": 0
+  }
+}
+      }]
+      sendMsg(msg)
+    }
+});
+  
+}
+
+function sendMsg(msg){
+    if (!liff.isInClient()) {
+          shareTargetPicker(msg);
+        } else {
+          sendMessages(msg);
+        }
+}
+
+function sendMessages(msg){
+   liff.sendMessages(msg).then(()=>{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'ส่งเข้าแชทเรียบร้อย',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(()=>{
+      liff.closeWindow();
+    })
+  })
+}
+
+ function shareTargetPicker(msg) {
+        liff.shareTargetPicker(msg).then((res)=>{
+    if (res) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'ส่งเข้าแชทเรียบร้อย',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+      liff.closeWindow();
+    })
+    } else {
+       console.log("TargetPicker was closed!");
+    }
+  }).catch(function (error) {
+          window.alert("Failed to send message " + error);
+        });
+      }
+    </script>
+  </body>
+</html>

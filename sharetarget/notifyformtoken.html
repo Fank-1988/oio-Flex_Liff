@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียน</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+    <style>
+        body {
+            font-family: 'line_seed_sans_th';
+        }
+        /* .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    } */
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+    <div class="max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+        <form action="">
+            <div class="w-full px-4">
+                <div>
+                    <center>
+                        <img id="picurl" src="https://media.giphy.com/media/eNwGfck2Awo3d2gB32/giphy.gif" class="dark:shadow-xl border-white dark:border-gray-500 rounded-full align-middle border-8 " width="30%">
+                    </center>
+                </div>
+                <div class="mt-12 flex flex-col items-center">
+                    <h1 class="text-2xl xl:text-3xl font-extrabold">
+                        โปรดกรอกข้อมูลให้ครบถ้วน
+                    </h1>
+                    <div class="w-full flex-1 mt-8">
+                        <div class="mx-auto max-w-xs">
+                            <input class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" type="text" id="name" name="name" placeholder="ชื่อเล่นของท่าน" required>
+                            <input class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" type="tel" id="message" name="message" placeholder="เบอร์โทรศัพท์" required>
+                            <div id="data"></div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">แนบรูปภาพที่เคยซื้อสติกเกอร์กับทางเรา หรือ ใบเสร็จยืนยัน</label>
+                            <input name="file" id="uploadfile" type="file" required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help">
+                            <p class="mt-6 text-xs text-gray-600 text-center">
+                                ฉันยอมรับข้อตกลงในการใช้ระบบเพื่ออำนวยความสะดวก หากสงสัย
+                                <a href="line://nv/profilePopup/mid=ufb9d34cac39cc328b9febede9f106341" class="border-b border-gray-500 border-dotted">
+                                    คลิกติดต่อ
+                                </a>
+                                ฝ่ายบริการ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
+                <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat" style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');"></div>
+            </div>
+            <!-- <div class="treact-popup fixed inset-0 flex items-center justify-center hidden" style="background-color: rgba(0,0,0,0.3);">
+                <div class="max-w-lg p-8 sm:pb-4 bg-white rounded shadow-lg text-center sm:text-left">
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-6 flex flex-col sm:flex-row items-center">
+                        <div class="bg-green-200 p-2 rounded-full flex items-center mb-4 sm:mb-0 sm:mr-2">
+                            <svg class="text-green-800 inline-block w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                        </div>
+                        ข้อกำหนดและเงื่อนไขเกี่ยวกับข้อมูลส่วนบุคคล
+                    </h3>
+                    <p>ขอความยินยอม (consent form) ตาม <span class="font-bold">PDPA</span> มีผลบังคับใช้ในวันที่ 1 มิถุนายน พ.ศ. 2564</p>
+                    <p class="mt-2">ข้าพเจ้าเข้าใจดีว่า ผู้ให้บริการ จะเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของข้าพเจ้า เพื่อวัตถุประสงค์ในการให้บริการตามสัญญานี้ การวิเคราะห์ข้อมูลเพื่อวางแผนทางการตลาด การนำเสนอสินค้าและบริการอื่นๆ ของผู้ให้บริการแก่ข้าพเจ้า รวมถึงวัตถุประสงค์อื่นๆ ตามที่ผู้ให้บริการเห็นสมควร</p>
+                    <div class="mt-8 pt-8 sm:pt-4 border-t -mx-8 px-8 flex flex-col sm:flex-row justify-end leading-relaxed">
+                        <a class="font-bold mt-4 sm:mt-0 sm:ml-4 px-8 py-3 sm:py-2 rounded  text-black-100 hover:bg-gray-700 transition duration-300 text-center"  href="https://line.me/R/oaMessage/@botstickerlth/" target="_blank">ปิด</a>
+                        <button class="close-treact-popup px-8 py-3 sm:py-2 rounded bg-green-900 text-gray-100 border border-green-400 hover:bg-green-200 transition duration-300">ยินยอม</button>
+                    </div>
+                </div>
+            </div> -->
+        </form>
+        <!-- <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+          <div class="spinner-border text-primary" role="status">
+            <div role="status">
+              <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                  <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+              </svg>
+              <span class="sr-only">Loading...</span>
+          </div>
+              
+          </div>
+      </div> -->
+
+      <div id="loading-overlay" class="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWQ3eHJrbzEyd3Exbm9qYzRza3dsYjYwM3JnN2ljYTk5a3liNjh4MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/EFLZGt8j4GyVuUwctu/giphy.gif" alt="Loading..." class="w-screen h-auto">
+    </div>
+      
+        <script>
+            function closeTreactPopup() {
+                document.querySelector(".treact-popup").classList.add("hidden");
+            }
+
+            function openTreactPopup() {
+                document.querySelector(".treact-popup").classList.remove("hidden");
+            }
+
+            document.querySelector(".close-treact-popup").addEventListener("click", closeTreactPopup);
+            setTimeout(openTreactPopup, 3000);
+        </script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+       <script>
+        liff.init({
+       liffId: '1656032875-dMjmJ80q', withLoginOnExternalBrowser: true,
+     }).catch((err) => {
+       console.log(err);
+     });
+ 
+     liff.ready.then(() => {
+       if (!liff.isLoggedIn()) {
+         liff.login();
+       }
+      
+       const idToken = liff.getDecodedIDToken();
+       const userId = idToken.sub;
+       const displayName = idToken.name;
+       const pictureUrl = idToken.picture;
+       const email = idToken.email;
+       document.getElementById("picurl").src = pictureUrl
+      const code = getUrlParameter('code');
+            if (code !== '') {
+                $('form').append(`<input type="hidden" name="code" value="${code}">`);
+            }
+   
+
+       $('form').append(`<input type="hidden" name="userId" value="${userId}">`);
+       $('form').append(`<input type="hidden" name="displayName" value="${displayName}">`);
+       $('form').append(`<input type="hidden" name="pictureUrl" value="${pictureUrl}">`);
+       $('form').append(`<input type="hidden" name="email" value="${email}">`);
+       $('form').append(`<center><button class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-4/5 py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+        >
+          <svg
+            class="w-6 h-6 -ml-2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <path d="M20 8v6M23 11h-6" />
+          </svg>
+          <span class="ml-3">
+           เข้าสู่ระบบ
+          </span>
+        </button></center>`);
+     })
+     $('form').submit(function(event) {
+    event.preventDefault();
+    $('#loading-overlay').removeClass('hidden');
+    $.post('https://script.google.com/macros/s/AKfycbysG-Klnk31W-FgFzYxqHsh1QpSSpcCLcro3JExSL-PIDt0EQa95Xh6ubfdP8W3SYZ4aQ/exec', $('form').serialize(), function(response) {
+        // การทำงานหลังจากที่โพสต์ข้อมูลเสร็จสิ้น
+        $('#loading-overlay').addClass('hidden');
+        if (response.statusCode === 200) {
+            const flexMessage = JSON.parse(response.body);
+            sendMsgLiff(flexMessage); 
+          
+        } else {
+            Swal.fire(
+                'เกิดข้อผิดพลาด',
+                'ไม่สามารถลงทะเบียนได้ในขณะนี้ โปรดลองอีกครั้งภายหลัง',
+                'error'
+            );
+        }
+    });
+});
+
+     
+        /* SendMessage */
+        function sendMsgLiff(flex){
+          liff.sendMessages(flex).then(() => {
+            Swal.fire(
+                'ดำเนินการสำเร็จ',
+                'คุณได้ลงทะเบียนเรียบร้อยแล้ว',
+                'success'
+            ).then(() =>{
+              liff.closeWindow();
+            })
+    
+  })
+        }
+     /*===== FOCUS =====*/
+ const inputs = document.querySelectorAll(".form__input")
+ 
+ /*=== Add focus ===*/
+ function addfocus(){
+     let parent = this.parentNode.parentNode
+     parent.classList.add("focus")
+ }
+ 
+ /*=== Remove focus ===*/
+ function remfocus(){
+     let parent = this.parentNode.parentNode
+     if(this.value == ""){
+         parent.classList.remove("focus")
+     }
+ }
+ 
+ /*=== To call function===*/
+ inputs.forEach(input=>{
+     input.addEventListener("focus",addfocus)
+     input.addEventListener("blur",remfocus)
+ })
+         function getUrlParameter(name) {
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+     </script>
+    <script>
+       $('#uploadfile').on("change", function() {
+           var file = this.files[0];
+           var fr = new FileReader();
+           fr.fileName = file.name;
+           fr.onload = function(e) {
+               e.target.result
+               html = '<input type="hidden" name="data" value="' + e.target.result.replace(/^.*,/, '') + '" >';
+               html += '<input type="hidden" name="mimetype" value="' + e.target.result.match(/^.*(?=;)/)[0] + '" >';
+               html += '<input type="hidden" name="filename" value="' + e.target.fileName + '" >';
+               $("#data").empty().append(html);
+           }
+           fr.readAsDataURL(file);
+       });
+       </script>    
+</body>
+</html>

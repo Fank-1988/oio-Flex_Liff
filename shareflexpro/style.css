@@ -1,0 +1,84 @@
+
+      .prompt {
+            font-family: 'Prompt', sans-serif;
+        }
+
+        .mali {
+            font-family: 'Mali', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Sarabun';
+        }
+
+        body {
+            font-family: 'kanit' !important;
+        }
+
+      #pictureUrl { display: block; margin: 0 auto }
+       .choice {
+      padding-top: 7px;
+      padding-left: 2px;
+      padding-bottom: 7px;
+    }
+
+    .marginbutton {
+      padding-left: 2px;
+    }
+
+    .labeltext {
+      font-size: 50px;
+    }
+
+    .button {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    #fname {
+      maxlength: "4";
+      size: "4";
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 300px;
+      /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+   
+body::-webkit-scrollbar {
+ width: 12px; /* กำหนดความกว้างของ scroll */
+}
+body::-webkit-scrollbar-track {
+ background: #b2c7f0; /* สีพื้นหลัง scroll */
+}
+body::-webkit-scrollbar-thumb {
+ background-color: #474ce6; /* กำหนดสีของแถบเลื่อน scroll */
+ border-radius: 20px; /* กำหนดความโค้งมนของแถบเลื่อน scroll */
+ border: 2px solid #b2c7f0; /* กำหนดกรอบเพื่อเว้นระยะรอบแถบเลื่อน scroll */
+}

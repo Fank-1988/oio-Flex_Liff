@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+ <!-- LineSeed Fonts -->
+<link href="https://cdn.jsdelivr.net/gh/maketline/goodday/font/stylesheet.min.css" rel="stylesheet">
+      <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      body {
+        font-family: 'line_seed_sans_th';
+      }
+    </style>
+  <title>กำลังพาท่านเข้าสู่หน้าเว็บ...</title>
+
+  </head>
+  <body>
+<div class="container text-center mt-5">
+<img src="https://i.im.ge/2022/12/18/dnNRqa.2564-01-03-094436.png" width="150px"  alt="ครบเครื่อง เรื่องไอที">
+ <h1>ครบเครื่อง เรื่องไอที...</h1>
+  <div class="flex justify-center items-center h-screen">
+    <div class="scene">
+      <div class="shadow"></div>
+      <div class="jumper">
+        <div class="spinner">
+          <div class="scaler">
+            <div class="loader">
+              <div class="cuboid">
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+                <div class="cuboid__side"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+  </div>
+  <!-- <button class="btn btn-danger mt-3" id="closeButton">ปิดหน้าต่าง</button> -->
+        </div>
+    </div>
+<div class="text-center">
+
+</div>
+</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+
+  <script>
+      $(document).ready(function() {
+           var path = new URL(window.location);
+           var liffId = path.searchParams.get('linkurl');
+             liff.init({
+               liffId: "1656032875-dMjmJ80q" //วางLiffId ตรงนี้
+             })
+             .then(() => {
+               if (liff.isInClient()) {
+                 if (liff.getOS() == "ios") {
+                   window.location.replace(""+liffId);              
+                 } else if (liff.getOS() == "android") {
+                   window.location.replace(""+liffId);
+                 }
+
+                 setTimeout(function(){ liff.closeWindow(); }, 3000); //เปลี่ยนเวลาที่ต้องการ Redirect
+               }
+             })
+             .catch((err) => {
+             });
+           });
+
+       // Check if LIFF is initialized
+     if (liff.isInClient()) {
+         // Add a click event listener to the close button
+         document.getElementById("closeButton").addEventListener("click", function() {
+             // Close the LIFF app when the button is clicked
+             liff.closeWindow();
+         });
+     } else {
+         // Handle the case when the app is not running in the LINE app
+         console.log("This app is not running in the LINE app.");
+     }
+  </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

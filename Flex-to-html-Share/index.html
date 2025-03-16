@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title> Share Flex message (เวอร์ชั่นปันสุข) </title>
+    <link rel="shortcut icon" href="https://developers.line.biz/console/favicon.ico">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
+    
+    
+      <link href='https://fonts.googleapis.com/css?family=Kanit|Niramit|Pattaya|Prompt|Sarabun|Sriracha|Questrial|Mitr|Mali|Itim' rel='stylesheet' type='text/css'>
+      <script src="https://kit.fontawesome.com/ad42651166.js" crossorigin="anonymous"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"/>
+
+
+<link href="https://cdn.jsdelivr.net/gh/projectwebpp/npn/mdb.min.css" rel="stylesheet">
+<link href="/Flex-to-html-Share/style.css" rel="stylesheet" type="text/css" />
+<link href="/Flex-to-html-Share/flex2html.css" rel="stylesheet" type="text/css" />
+ <script src="/Flex-to-html-Share/flex2html.js"></script>
+
+  </head>
+  <body onload="myFunction()">
+    <div id="text"></div>
+      <div class="row justify-content-center">
+        <div class="col text-center ">
+            <div class="p-3 mb-2 bg-primary text-white fixed-top"><i class="fa fa-share" aria-hidden="true"></i>ระบบส่งข่าวสารผ่านไลน์ ด้วย FlexMessage (เวอร์ชั่นปันสุข)</div>
+            <br><br>
+          <h3 class="text-primary fw-bolder"></h3><br>
+          <img id="pictureUrl" class="img-circle" alt="Cinque Terre" width="50" height="50"> 
+          <p id="userId"></p>
+          <center><p id="displayName"></p></center>
+          <p id="statusMessage"></p>
+          <p id="getDecodedIDToken"></p>
+          <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+          <script>
+            function runApp() {
+              liff.getProfile().then(profile => {
+                document.getElementById("pictureUrl").src = profile.pictureUrl;  // %u0E41%u0E2A%u0E14%u0E07%u0E23%u0E39%u0E1B Profile %u0E17%u0E35%u0E48%u0E14%u0E36%u0E07%u0E21%u0E32
+                //document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId; 
+                document.getElementById("displayName").innerHTML = '<b>สวัสดี:</b> ' + profile.displayName; // %u0E41%u0E2A%u0E14%u0E07%u0E0A%u0E37%u0E48%u0E2D Line %u0E02%u0E2D%u0E07%u0E1C%u0E39%u0E49%u0E43%u0E0A%u0E49
+                //document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;  // %u0E41%u0E2A%u0E14%u0E07%u0E2A%u0E16%u0E32%u0E19%u0E30%u0E02%u0E2D%u0E07%u0E1C%u0E39%u0E49%u0E43%u0E0A%u0E49 Line
+                //document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+              }).catch(err => console.error(err));
+            }
+            liff.init({ liffId: "1656032875-lnegDwdo" }, () => { // เปลี่ยน LIFF ID 
+              if (liff.isLoggedIn()) {
+                runApp()
+              } else {
+                liff.login();
+              }
+            }, err => console.error(err.code, error.message));
+        
+        // logout
+            const accessToken = liff.getAccessToken();
+        if (accessToken) {
+          fetch("https://api...", {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`
+            }
+            //...
+          });
+        }
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <script
+      charset="utf-8"
+      src="https://static.line-scdn.net/liff/edge/2/sdk.js"
+    ></script>
+
+    <script>
+      function process() {
+        let input = document.getElementById("flexjson").value;
+        let altText = document.getElementById("altText").value;
+        let displayName = document.getElementById("displayName").value;
+        let output;
+        let isFlex = false;
+        try {
+          let flex = JSON.parse(input);
+          output = flex;
+          isFlex = true;
+        } catch (e) {
+          output = input;
+          isFlex = false;
+        }
+        sendTemplatFlex(output, isFlex,altText,);
+      }
+    </script>
+    <script>
+      (async () => {
+        let liffId = "1656032875-lnegDwdo"; 
+        await liff.init({ liffId: liffId });
+        liff.ready.then(() => {
+          if (!liff.isLoggedIn()) {
+            liff.login();
+          }
+        });
+      })();
+
+      function setCredit(message) {
+        if (message.footer?.contents?.length > 0) {
+          let length = message.footer?.contents.length;
+          if (message.footer?.contents[length - 1]?.type == "spacer") {
+            message.footer.contents.push("Developed by ครบเครื่อง เรื่องไอที");
+            length++
+            message.footer.contents[length - 1] =
+              message.footer.contents[length - 2];
+            message.footer.contents[length - 2] = {
+              type: "text",
+              text: "Developed by ครบเครื่อง เรื่องไอที",
+              weight: "bold",
+              align: "center",
+              size: "10px",
+              decoration: "none",
+              color: "#3366FF"
+            };
+          } else {
+            message.footer?.contents.push({
+              type: "text",
+              text: "Developed by ครบเครื่อง เรื่องไอที",
+              weight: "bold",
+              align: "center",
+              decoration: "none",
+              size: "10px",
+              color: "#3366FF",
+              adjustMode: "shrink-to-fit"
+            });
+          }
+        } else {
+          message.footer = {
+            type: "box",
+            layout: "vertical",
+            spacing: "sm",
+            contents: [
+              {
+                type: "text",
+                text: "Developed by ครบเครื่อง เรื่องไอที",
+                weight: "bold",
+                align: "center",
+                decoration: "none",
+                size: "10px",
+                color: "#3366FF",
+                adjustMode: "shrink-to-fit"
+              }
+            ],
+            flex: 0
+          };
+        }
+        return message;
+      }
+
+      async function sendTemplatFlex(output, isFlex,altText) {
+        method = "share";
+        let message;
+        if (isFlex) {
+          if (output.type != "flex") {
+            message = {
+              type: "flex",
+              altText: altText,
+              contents: output
+            };
+            if (message.contents.type == "carousel") {
+              message.contents.contents.map(bubble => setCredit(bubble));
+            } else {
+              message.contents = setCredit(message.contents);
+            }
+          } else {
+            message = `${output}\n\nDeveloped by ครบเครื่อง เรื่องไอที`;
+          }
+        } else {
+          message = {
+            type: "text",
+            text: `${output}\n\nDeveloped by ครบเครื่อง เรื่องไอที`
+          };
+        }
+        //console.log(message);
+        liff.ready.then(() => {
+          if (!liff.isInClient()) {
+            if (!liff.isLoggedIn()) {
+              liff.login();
+            } else {
+              if (liff.isApiAvailable("shareTargetPicker")) {
+                liff.shareTargetPicker([message]).then(result => {
+                  if (result) {                
+                    Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'ส่งข้อความเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
+                    liff.closeWindow();
+                  } else {              
+                    const [majorVer, minorVer, patchVer] = (
+                      liff.getLineVersion() || ""
+                    ).split(".");
+               
+                    if (minorVer === undefined) {
+                    Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'ยกเลิกการส่งข้อความเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                     timer: 1500
+                    })
+                      return;
+                    }
+
+                    if (
+                      parseInt(majorVer) >= 10 &&
+                      parseInt(minorVer) >= 10 &&
+                      parseInt(patchVer) > 0
+                    ) {
+
+                    Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'ยกเลิกการส่งข้อความเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                     timer: 1500
+                    })
+                    }
+                  }
+                });
+              }
+            }
+          } else {
+            if (liff.isApiAvailable("shareTargetPicker")) {
+              liff.shareTargetPicker([message]).then(result => {
+                if (result) {
+
+                 Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'ส่งข้อความเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
+                  liff.closeWindow();
+                } else {
+             
+                  const [majorVer, minorVer, patchVer] = (
+                    liff.getLineVersion() || ""
+                  ).split(".");
+
+               
+                  if (minorVer === undefined) {
+                
+                   Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'ส่งข้อความเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
+                    return;
+                  }
+
+              
+                  if (
+                    parseInt(majorVer) >= 10 &&
+                    parseInt(minorVer) >= 10 &&
+                    parseInt(patchVer) > 0
+                  ) {
+
+                    Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'ยกเลิกการส่งข้อความเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                     timer: 1500
+})
+                  }
+                }
+              });
+            }
+          }
+        });
+      }
+    </script>
+      <div class="row">
+        <div class="column">
+          <form>
+            <div class="container">
+              <!-- <label for="flexid"><b>Flex ID</b></label><br>
+              <input id="flexid" type="text"  class="form-control" placeholder="Insert Flex ID" name="flexid" maxlength="20"><br><br> -->
+              <label for="altText"><b>altText</b></label><br>
+              <input id="altText" type="text"  class="form-control" placeholder="Insert altText" name="altText" maxlength="20"><br><br>
+
+              <label for="flexjson"><b>Flex Json</b></label><br>
+              <a class="btn btn-outline-danger mt-2 mb-2" href="https://developers.line.biz/flex-simulator/" target="_blank" role="button">ออกแบบFlexJson</a>
+               <span class="badge rounded-pill bg-danger" type="button" onclick="resetJson()">ลบโค๊ด Json</span>
+  <span type="button" class="badge rounded-pill bg-primary" onclick="paste()">วาง Json</span>
+   <span type="button" class="badge rounded-pill bg-success" onclick="enableInputflex()" id="unlock">พิมพ์โค๊ดJsonเอง</span>
+  <span type="button" class="badge rounded-pill bg-secondary" onclick="lockinput()" id="lock" style="display: none;">ล็อค</span>
+              <textarea id="flexjson"  class="form-control"name="flexjson" rows="20" cols="50" onchange="myFunction()" readonly>{
+          "type": "bubble",
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "ครบเครื่อง เรื่องไอที"
+              }
+            ]
+          }
+        }</textarea><br>
+                 <input type="button" id="button"   value="ส่งข้อความไปยังแชท" onclick="process()" class="btn btn-success" /> 
+            </div>
+          </form>
+        </div>
+        <div class="column">
+          <div class="card">
+  <div class="card-body">
+    <p>แสดงตัวอย่าง Flexก่อนส่ง </p>
+          <div class="chatbox text-center">
+            <div id="flex1">
+          </div>
+            
+                <footer class="bg-primary text-white text-center text-lg-start mt-3">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+  <div class="alert" id="message" style="font-size:0.9rem" style="display:none"></div
+  </div>
+</footer>
+
+      <script>
+        function myFunction() {
+  var x = document.getElementById("flexjson").value;
+  try {
+    document.getElementById('flex1').innerHTML = "";
+    x = JSON.parse(x)
+    console.log(x)
+    var flexdat = {}
+    flexdat["type"] = "flex";
+    flexdat["altText"] = "Flex Message";
+    flexdat["contents"] = x;
+    flex2html("flex1",flexdat);
+  }
+  catch(err){
+    console.log(err)
+    document.getElementById('flex1').innerHTML = "";
+  }
+}
+      </script>
+
+
+       <script src="https://cdn.jsdelivr.net/gh/projectwebpp/npn/sweetalert2@11.js"></script>
+  <script src="/Flex-to-html-Share/script.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>    
+  </body>
+</html>

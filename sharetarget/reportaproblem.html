@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta property="og:locale" content="th_TH" />
+    <meta property="og:site_name" content="Botstickerlth by iton5" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Botstickerlth Official Account" />
+    <meta property="og:description" content="LINE API & Sticker LINE" />
+    <meta property="og:url" content="https://liff.line.me/1645278921-kWRPP32q/?accountId=botstickerlth" />
+    <meta property="og:image" content="https://lh3.googleusercontent.com/d/1Ck_OCfEW4dEp3A1k9yfQplYmW7qmwzFF" />
+    <meta property="og:image:secure_url" content="https://lh3.googleusercontent.com/d/1Ck_OCfEW4dEp3A1k9yfQplYmW7qmwzFF" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <title>Complain for LIFF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://bit.ly/fontiton5" type="text/css" charset="utf-8" />
+    <style type="text/css">
+        body {
+            font-family: 'line_seed_sans_th';
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative isolate overflow-hidden bg-white px-6 py-20 text-center sm:px-16 sm:shadow-sm">
+            <center>
+                <img class="text-center block mx-auto h-24 rounded-full sm:mx-0 sm:flex-shrink-0" id="pictureUrl"
+                    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjg5ajlhemdyZjlrZDgwdjMwbTl1dGdtbnhvM2p4Y2t0ZnpnZnE4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l150Tal3EKqgj0v9gs/giphy.gif"
+                    alt="Woman's Face">
+                <div class="text-center space-y-2 sm:text-center">
+                    <div class="space-y-0.5">
+                        <p class="text-lg text-black font-semibold" id="displayName">
+                            ....
+                        </p>
+                    </div>
+                </div>
+            </center>
+            <p class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl my-4">
+                ความคิดเห็นของคุณคือการพัฒนาที่ดีขึ้นของเรา
+            </p>
+            <form action="">
+                <label
+                    class="mx-auto mt-8 relative bg-white min-w-xs max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
+                    for="complain">
+                    <textarea id="complain" rows="4" placeholder="โปรดกรอกข้อความ" name="complain"
+                        class="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white" required=""></textarea>
+                    <button type="submit" id="message"
+                        class="w-full md:w-auto px-6 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
+                        <div class="flex items-center transition-all opacity-1">
+                            <span class="text-sm font-semibold whitespace-nowrap truncate mx-auto">
+                                ส่งข้อความ
+                            </span>
+                        </div>
+                    </button>
+                </label>
+            </form>
+            <svg viewBox="0 0 1024 1024"
+                class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
+                aria-hidden="true">
+                <circle cx="512" cy="512" r="512" fill="url(#827591b1-ce8c-4110-b064-7cb85a0b1217)" fill-opacity="0.7">
+                </circle>
+                <defs>
+                    <radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217">
+                        <stop stop-color="#3b82f6"></stop>
+                        <stop offset="1" stop-color="#1d4ed8"></stop>
+                    </radialGradient>
+                </defs>
+            </svg>
+        </div>
+    </div>
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzJjcmRoZ3A2Nml6a29vcXAzMmx0OXp0eXFtbjcxMmtxeXlleDc2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gavRXhc89KTh1oJzoL/giphy.gif"
+            alt="Loading..." class="w-1/2 h-auto">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        window.onload = async function () {
+            const defaultLiffId = "1656032875-dMjmJ80q";
+            await initializeLiff(defaultLiffId);
+        };
+
+        async function initializeLiff(defaultLiffId) {
+            try {
+                await liff.init({
+                    liffId: defaultLiffId,
+                    withLoginOnExternalBrowser: true,
+                });
+
+                liff.ready.then(async () => {
+                  if (!liff.isLoggedIn()) {
+                      liff.login();
+                      }
+                    const profile = await liff.getProfile();
+                    document.getElementById('pictureUrl').src = profile.pictureUrl;
+                    document.getElementById('displayName').textContent = profile.displayName;
+                });
+            } catch (error) {
+                console.error('LIFF Initialization failed', error);
+            }
+        }
+
+        document.getElementById('message').onclick = async function (event) {
+            event.preventDefault();
+            try {
+                const profile = await liff.getProfile();
+                const userId = profile.userId;
+                const name = profile.displayName;
+                const picture = profile.pictureUrl;
+                const complain = document.getElementById('complain').value;
+               if (!complain) {
+            Swal.fire('ผิดพลาด', 'โปรดกรอกข้อมูลก่อน', 'info');
+            return;
+        }
+                await sendToSheet(userId, name, picture, complain);
+            } catch (error) {
+                console.error('Error getting profile or sending to sheet', error);
+            }
+        }
+
+        async function sendToSheet(userId, name, picture, complain) {
+            $('#loading-overlay').removeClass('hidden');
+            try {
+                const response = await $.post('https://script.google.com/macros/s/AKfycbyhJcKK-qiCqiaLu1PiEyFrccx-r2xd8X6KiaaT93S3GBQenRzTxPBib4CDfEOoCSas/exec', {
+                    complain: complain,
+                    userId: userId,
+                    name: name,
+                    picture: picture
+                });
+                $('#loading-overlay').addClass('hidden');
+                if (response.statusCode === 200) {
+                    const flexMessage = JSON.parse(response.body);
+                    Swal.fire('ดำเนินการสำเร็จ', 'ขอบคุณสำหรับความคิดเห็น', 'success').then(() => {
+                        sendMessages([flexMessage]);
+                    });
+                }
+            } catch (error) {
+                console.error('Error sending data to sheet', error);
+                $('#loading-overlay').addClass('hidden');
+            }
+        }
+
+        async function sendMessages(msg) {
+            try {
+                await liff.sendMessages(msg);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "ส่งเข้าแชทเรียบร้อย",
+                    showConfirmButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    liff.closeWindow();
+                });
+            } catch (error) {
+                console.error('Error sending messages', error);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">  
+    <title>ระบบสร้างคิวอาร์โค๊ด</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<!-- LineSeed Fonts -->
+  <link href="https://cdn.jsdelivr.net/gh/maketline/goodday/font/stylesheet.min.css" rel="stylesheet">
+<!--   <link href="/style.css" rel="stylesheet"> -->
+<link href="/qrcode/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+				<center>
+        <h1>ระบบสร้างคิวอาร์โค๊ดอัตโนมัติ</h1>
+       	<p id="showname"></p></center>		
+      </header>
+      <div class="form" id="genqr">
+        <input type="text" id="input" spellcheck="false" placeholder="พิมพ์ข้อความ หรือลิงค์">
+        <button>สร้างคิวอาร์โค๊ด</button>
+      </div>
+			<div id="showqr">
+      <div class="qr-code">
+        <img src="" alt="qr-code">
+      </div>
+				<div class="d-grid gap-2">
+	<button id="showback"class="btn btn-primary mt-2" onclick="blackup()" style="display: none;">ย้อนกลับ</button>
+</div>
+    </div>
+    <script src="/qrcode/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

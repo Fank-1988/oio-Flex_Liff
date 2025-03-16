@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+  <title>กำลังแชร์...</title> 
+</head>
+<body>
+<script src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
+  <script>
+    async function main() {
+      await liff.init({ liffId: "1656032875-dMjmJ80q" })
+      await liff.shareTargetPicker([
+        {
+          "type": "imagemap",
+          "baseUrl": "https://sv1.picz.in.th/images/2022/06/24/VRqr3E.png",
+          "altText": "This is an imagemap",
+          "baseSize": {
+            "width": 1040,
+            "height": 2080
+          },
+          "actions": [
+            {
+              "type": "uri",
+              "area": {
+               "x": 580,
+                "y": 266,
+                "width": 372,
+                "height": 241
+              },
+              "linkUri": "https://google.co.th"
+            },
+            {
+              "type": "uri",
+              "area": {
+                  "x": 582,
+                "y": 543,
+                "width": 369,
+                "height": 237
+              },
+              "linkUri": "https://facebook.com"
+            },
+            {
+              "type": "uri",
+              "area": {
+               "x": 582,
+                "y": 815,
+                "width": 371,
+                "height": 239
+              },
+              "linkUri": "https://youtube.com"
+            },
+            {
+              "type": "uri",
+              "area": {
+                 "x": 581,
+                "y": 1085,
+                "width": 369,
+                "height": 242
+              },
+              "linkUri": "https://twitter.com"
+            },
+            {
+              "type": "uri",
+              "area": {
+                   "x": 149,
+                "y": 1377,
+                "width": 348,
+                "height": 90
+              },
+              "linkUri": "https://youtube.com"
+            },
+            {
+              "type": "uri",
+              "area": {
+                "x": 525,
+                "y": 1380,
+                "width": 348,
+                "height": 87
+              },
+              "linkUri": "https://facebook.com"
+            },
+            {
+              "type": "message",
+              "area": {
+                "x": 392,
+                "y": 1501,
+                "width": 231,
+                "height": 233
+              },
+              "text": "Action 7"
+            },
+            {
+              "type": "uri",
+              "area": {
+                "x": 207,
+                "y": 1817,
+                "width": 627,
+                "height": 170
+              },
+              "linkUri": "tel:0986989891"
+            }
+          ]
+        }
+    ])
+    liff.closeWindow()
+  }
+  main()
+  </script>
+</body>
+</html>
